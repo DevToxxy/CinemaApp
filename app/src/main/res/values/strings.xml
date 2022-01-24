@@ -11,6 +11,10 @@
 
     <string name="add_movie_button">Add Movie</string>
 
+    <string name="cancel_button">Cancel</string>
+    <string name="confirm_button">Confirm</string>
+
+
 
 
 </resources>
