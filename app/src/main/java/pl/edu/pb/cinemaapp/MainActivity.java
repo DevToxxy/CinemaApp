@@ -1,6 +1,7 @@
 package pl.edu.pb.cinemaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,7 +81,14 @@ public class MainActivity extends AppCompatActivity {
             holder.ageTextView.setText(String.valueOf(movieList.get(position).getAge()));
             holder.lengthTextView.setText(String.valueOf(movieList.get(position).getLength()));
             Glide.with(this.context).load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg").into(holder.pictureImageView);
-
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, AddEditMovie.class);
+                    intent.putExtra("id", movieList.get(holder.getAdapterPosition()).getId()); //position wyrzuca blad: do not treat position as fixed
+                    context.startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -95,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         private TextView lengthTextView;
         private ImageView pictureImageView;
 
+        ConstraintLayout parentLayout;
+
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -103,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
             lengthTextView = itemView.findViewById(R.id.one_movie_length);
 
             pictureImageView = itemView.findViewById(R.id.one_movie_picture);
+
+            parentLayout = itemView.findViewById(R.id.one_movie_layout);
 
         }
 

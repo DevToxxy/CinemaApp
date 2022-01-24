@@ -1,5 +1,9 @@
 package pl.edu.pb.cinemaapp;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +48,14 @@ public class MovieStorage {
                 movie.setAge(13);
                 movie.setLength(180);
                 movies.add(movie);
+            }
+        }
+
+        public void setMovie(UUID id, Movie movie) {
+            for (Movie mov : movies) {
+                if (mov.getId().equals(id)) {
+                    mov = movie;
+                }
             }
         }
 }
