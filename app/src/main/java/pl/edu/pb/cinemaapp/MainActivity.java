@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button addMovieButton;
+    MovieStorage movieStorage = MovieStorage.getInstance();
+    List<Movie> movieList = movieStorage.getMovies();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
