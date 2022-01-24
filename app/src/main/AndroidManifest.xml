@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CinemaApp">
         <activity
+            android:name=".AddEditMovie"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

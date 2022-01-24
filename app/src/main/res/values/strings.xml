@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">CinemaApp</string>
+
+    <string name="movie_title_label">Title:</string>
+    <string name="age_rating_label">Age Rating:</string>
+    <string name="length_label">Length:</string>
+
+    <string name="movie_title_hint">Title</string>
+    <string name="age_rating_hint">Age Rating</string>
+    <string name="length_hint">Length</string>
+
+    <string name="add_movie_button">Add Movie</string>
+
+
+
 </resources>
