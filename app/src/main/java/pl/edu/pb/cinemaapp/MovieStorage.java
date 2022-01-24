@@ -15,7 +15,7 @@ public class MovieStorage {
 
         private MovieStorage() {
             movies = new ArrayList<>();
-            fillMovieStorage(); //for testing
+            fillMovieStorage(); //for testing //TODO: get rid of
         }
 
         public List<Movie> getMovies() {
@@ -36,7 +36,7 @@ public class MovieStorage {
             movies.add(movie);
         }
 
-        //for testing
+        //for testing //TODO: get rid of
         public void fillMovieStorage(){
             for (int i = 1; i <= 4; i++) {
                 Movie movie = new Movie();

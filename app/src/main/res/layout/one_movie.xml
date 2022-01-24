@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/one_movie_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/one_movie_layout">
+    android:layout_height="wrap_content">
+
 
     <ImageView
-        android:id="@+id/movie_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/one_movie_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/small_margin"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,23 +18,33 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/movie_pegi"
+        android:id="@+id/one_movie_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_margin"
         android:text="TextView"
         android:textSize="@dimen/big_font"
-        app:layout_constraintStart_toEndOf="@+id/movie_picture"
-        app:layout_constraintTop_toTopOf="@+id/movie_picture" />
+        app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
+        app:layout_constraintTop_toTopOf="@+id/one_movie_picture" />
 
     <TextView
-        android:id="@+id/movie_length"
+        android:id="@+id/one_movie_age_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="@dimen/big_font"
-        app:layout_constraintStart_toEndOf="@+id/movie_picture"
-        app:layout_constraintTop_toBottomOf="@+id/movie_pegi" />
+        app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
+        app:layout_constraintTop_toBottomOf="@+id/one_movie_title" />
+
+    <TextView
+        android:id="@+id/one_movie_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/big_font"
+        app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
+        app:layout_constraintTop_toBottomOf="@+id/one_movie_age_rating" />
+
+
 
     <View
         android:id="@+id/divider"
@@ -43,5 +54,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/one_movie_picture" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
