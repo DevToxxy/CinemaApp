@@ -14,10 +14,11 @@ import java.util.UUID;
 public class AddEditMovie extends AppCompatActivity {
 
     private Button confirmButton, cancelButton;
-    EditText editMovieTitle, editMovieLength, editMovieAgeRating;
-    List<Movie> movieList;
-    MovieStorage movieStorage = MovieStorage.getInstance();
-    int id;
+    private EditText editMovieTitle, editMovieLength, editMovieAgeRating;
+    private List<Movie> movieList;
+    private MovieStorage movieStorage = MovieStorage.getInstance();
+    private String id;
+    private String addingMode = "AddingMode";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,34 +34,35 @@ public class AddEditMovie extends AppCompatActivity {
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
 
         Intent newIntent = getIntent();
-        id = newIntent.getIntExtra("id",-1); //jesli -1 to tryb dodawania nowego filmu
-
-        if(id >= 0){
-            Movie addMovie = null;
+        id = newIntent.getExtras().getString("id",addingMode);
+        if(!(id.equals(addingMode))){  //Editing mode
+            UUID temporaryId = UUID.fromString(id);
+            Movie editMovie = null;
             for (Movie movie: movieList) {
-                if(movie.getId().equals(id)){
-                    addMovie = movie;
+                if(movie.getId().equals(temporaryId)){
+                    editMovie = movie;
+                    editMovieTitle.setText(editMovie.getTitle());
+                    editMovieLength.setText(String.valueOf(editMovie.getLength()));
+                    editMovieAgeRating.setText(String.valueOf(editMovie.getAge()));
+
                 }
             }
-            editMovieTitle.setText(addMovie.getTitle());
-            editMovieLength.setText(addMovie.getLength());
-            editMovieAgeRating.setText(addMovie.getAge());
 
         }
-        else {
+        else {  //Adding mode
 
         }
         confirmButton.setOnClickListener(v -> {
 
-            if(id >= 0){
+            if(!(id.equals(addingMode))){         //Editing mode
                 Movie editedMovie = new Movie(editMovieTitle.getText().toString(),
                         Integer.parseInt(editMovieLength.getText().toString()),
                         Integer.parseInt(editMovieAgeRating.getText().toString()));
-                UUID uniqueid;
-                uniqueid = id;
-                movieStorage.setMovie(uniqueid,editedMovie);
+                UUID temporaryId = UUID.fromString(id);
+
+                movieStorage.setMovie(temporaryId,editedMovie);
             }
-            else  {
+            else  {                 //Adding mode
                 Movie newMovie = new Movie(editMovieTitle.getText().toString(),
                         Integer.parseInt(editMovieLength.getText().toString()),
                         Integer.parseInt(editMovieAgeRating.getText().toString()));

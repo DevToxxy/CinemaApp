@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.UUID;
 
 import lombok.NonNull;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
+                intent.putExtra("id","AddingMode");
                 startActivity(intent);
             }
         });
@@ -85,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, AddEditMovie.class);
-                    intent.putExtra("id", movieList.get(holder.getAdapterPosition()).getId()); //position wyrzuca blad: do not treat position as fixed
+                    UUID tempID = movieList.get(holder.getAdapterPosition()).getId(); //position wyrzuca blad: do not treat position as fixed
+
+                    intent.putExtra("id",tempID.toString());
                     context.startActivity(intent);
                 }
             });
