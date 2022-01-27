@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
-                intent.putExtra("id",AddEditMovie.addingMode);
+                intent.putExtra(AddEditMovie.extraId,AddEditMovie.addingMode);
                 startActivity(intent);
             }
         });
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, AddEditMovie.class);
                     UUID tempID = movieList.get(holder.getAdapterPosition()).getId(); //position wyrzuca blad: do not treat position as fixed
 
-                    intent.putExtra("id",tempID.toString());
+                    intent.putExtra(AddEditMovie.extraId,tempID.toString());
                     context.startActivity(intent);
                 }
             });

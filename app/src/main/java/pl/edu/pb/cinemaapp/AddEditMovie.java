@@ -19,6 +19,8 @@ public class AddEditMovie extends AppCompatActivity {
     private MovieStorage movieStorage = MovieStorage.getInstance();
     private String id;
     public final static String addingMode = "AddingMode";
+    public final static String extraId = "id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class AddEditMovie extends AppCompatActivity {
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
 
         Intent newIntent = getIntent();
-        id = newIntent.getExtras().getString("id",addingMode);
+        id = newIntent.getExtras().getString(extraId,addingMode);
         if(!(id.equals(addingMode))){  //Editing mode
             UUID temporaryId = UUID.fromString(id);
             Movie editMovie = null;
