@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
-                intent.putExtra("id","AddingMode");
+                intent.putExtra("id",AddEditMovie.addingMode);
                 startActivity(intent);
             }
         });

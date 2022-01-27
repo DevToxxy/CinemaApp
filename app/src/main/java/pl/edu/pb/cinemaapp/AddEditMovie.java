@@ -18,7 +18,7 @@ public class AddEditMovie extends AppCompatActivity {
     private List<Movie> movieList;
     private MovieStorage movieStorage = MovieStorage.getInstance();
     private String id;
-    private String addingMode = "AddingMode";
+    public final static String addingMode = "AddingMode";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
