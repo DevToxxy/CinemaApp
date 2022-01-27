@@ -54,7 +54,9 @@ public class MovieStorage {
         public void setMovie(UUID id, Movie movie) {
             for (Movie mov : movies) {
                 if (mov.getId().equals(id)) {
-                    mov = movie;
+                    mov.setLength(movie.getLength()) ;
+                    mov.setTitle(movie.getTitle()) ;
+                    mov.setAge(movie.getAge());
                 }
             }
         }
