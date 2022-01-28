@@ -2,6 +2,7 @@ package pl.edu.pb.cinemaapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
@@ -16,10 +17,12 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -34,11 +37,14 @@ public class MainActivity extends AppCompatActivity {
     private MovieViewModel movieViewModel;
 
     private FloatingActionButton addMovieButton;
+    private ConstraintLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainLayout = findViewById(R.id.main_layout);
 
         createNotificationChannel();
 
@@ -69,8 +75,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@androidx.annotation.NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                movieViewModel.delete(movieAdapter.getMovieAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, R.string.successful_deletion, Toast.LENGTH_SHORT).show();
+                Movie movieToSave = movieAdapter.getMovieAt(viewHolder.getAdapterPosition());
+                movieViewModel.delete(movieToSave);
+
+                Snackbar.make(mainLayout, R.string.successful_deletion, Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", view -> {
+                            Snackbar.make(mainLayout, R.string.undo_movie_delete, Snackbar.LENGTH_SHORT).show();
+                            movieViewModel.insert(movieToSave);
+                        }).show();
+
+
             }
         }).attachToRecyclerView(recyclerView);
 

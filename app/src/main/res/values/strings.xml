@@ -18,6 +18,7 @@
     <string name="successful_save">Saved successfully</string>
     <string name="notification_content">You can now buy tickets for: </string>
     <string name="notification_title">New movie!</string>
+    <string name="undo_movie_delete">Movie restored</string>
 
     <string name="failed_update">Can\'t update</string>
     <string name="failed_save">Saving aborted</string>
