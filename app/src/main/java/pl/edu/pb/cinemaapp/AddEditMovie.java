@@ -2,27 +2,43 @@ package pl.edu.pb.cinemaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.hardware.lights.Light;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.UUID;
 
-public class AddEditMovie extends AppCompatActivity {
+//TODO: remember to remove implements
+
+public class AddEditMovie extends AppCompatActivity implements SensorEventListener {
 
     private EditText editMovieTitle, editMovieLength, editMovieAgeRating;
+
+    //TODO: move to ticket activity
+    private Sensor lightSensor;
+    private SensorManager sensorManager;
+
 
     public static final String extraId = "extraId";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
-
 
     boolean isAllFieldsChecked = false;
 
@@ -75,7 +91,10 @@ public class AddEditMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_movie);
 
-
+        //TODO: move to ticket activity
+        askPermission(this);
+        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
         editMovieTitle = findViewById(R.id.edit_movie_title);
         editMovieLength = findViewById(R.id.edit_movie_length);
@@ -120,5 +139,47 @@ public class AddEditMovie extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    //TODO: move to ticket class
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(event.values[0] < 1000)
+        {
+            Toast.makeText(this, "Light too low", Toast.LENGTH_SHORT).show();
+            android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,255);
+        }
+        else return;
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    public void askPermission(Context context){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            if(Settings.System.canWrite(context)){
+                //permission is granted
+            }
+            else{
+                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                context.startActivity(intent);
+            }
     }
 }
