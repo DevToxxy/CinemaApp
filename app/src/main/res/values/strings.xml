@@ -27,7 +27,11 @@
     <string name="rating_validation_num">Only numbers allowed. Max number: 99</string>
     <string name="length_validation_req">Length is required</string>
     <string name="length_validation_num">Only numbers allowed. Max number: 999</string>
+    <string name="raise_brightness">Raising brightness for better ticket scanning</string>
 <!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+
 
 
 </resources>

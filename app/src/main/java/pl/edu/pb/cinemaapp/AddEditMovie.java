@@ -161,7 +161,7 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if(event.values[0] < 1000)
         {
-            Toast.makeText(this, "Light too low", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.raise_brightness), Toast.LENGTH_SHORT).show();
             android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,255);
         }
         else return;
