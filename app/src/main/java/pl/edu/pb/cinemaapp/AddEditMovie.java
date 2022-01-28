@@ -16,13 +16,8 @@ import java.util.UUID;
 
 public class AddEditMovie extends AppCompatActivity {
 
-    //private Button confirmButton, cancelButton; //TODO:
     private EditText editMovieTitle, editMovieLength, editMovieAgeRating;
-    //private List<Movie> movieList;
-    //private MovieStorage movieStorage = MovieStorage.getInstance(); //TODO:
-    private String id;
 
-    public static final String addingMode = "AddingMode";
     public static final String extraId = "extraId";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
@@ -80,10 +75,7 @@ public class AddEditMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_movie);
 
-        //movieList = movieStorage.getMovies(); //TODO:
 
-        //confirmButton = findViewById(R.id.button_confirm);//TODO:
-       // cancelButton = findViewById(R.id.button_cancel);//TODO:
 
         editMovieTitle = findViewById(R.id.edit_movie_title);
         editMovieLength = findViewById(R.id.edit_movie_length);
@@ -103,50 +95,6 @@ public class AddEditMovie extends AppCompatActivity {
             setTitle("Add movie");
         }
 
-//        Intent newIntent = getIntent();
-//        id = newIntent.getExtras().getString(extraId, addingMode);
-//        if (!(id.equals(addingMode))) {  //Editing mode
-//            UUID temporaryId = UUID.fromString(id);
-//            Movie editMovie = null;
-//            for (Movie movie : movieList) {
-//                if (movie.getId().equals(temporaryId)) {
-//                    editMovie = movie;
-//                    editMovieTitle.setText(editMovie.getTitle());
-//                    editMovieLength.setText(String.valueOf(editMovie.getLength()));
-//                    editMovieAgeRating.setText(String.valueOf(editMovie.getAge()));
-//
-//                }
-//            }
-//
-//        } else {  //Adding mode
-//
-//        }
-//        confirmButton.setOnClickListener(v -> {
-//            isAllFieldsChecked = CheckAllFields();
-//            if (isAllFieldsChecked) {
-//                if (!(id.equals(addingMode))) {         //Editing mode
-//                    Movie editedMovie = new Movie(editMovieTitle.getText().toString(),
-//                            Integer.parseInt(editMovieLength.getText().toString()),
-//                            Integer.parseInt(editMovieAgeRating.getText().toString()));
-//                    UUID temporaryId = UUID.fromString(id);
-//
-//                    movieStorage.setMovie(temporaryId, editedMovie);
-//                } else {                 //Adding mode
-//                    Movie newMovie = new Movie(editMovieTitle.getText().toString(),
-//                            Integer.parseInt(editMovieLength.getText().toString()),
-//                            Integer.parseInt(editMovieAgeRating.getText().toString()));
-//                    movieStorage.addMovie(newMovie);
-//                }
-//
-//                Intent intent = new Intent(AddEditMovie.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        cancelButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(AddEditMovie.this, MainActivity.class);
-//            startActivity(intent);
-//        });
 
     }
 
@@ -171,8 +119,6 @@ public class AddEditMovie extends AppCompatActivity {
             return false;
         }
 
-
-        // after all validation return true.
         return true;
     }
 }

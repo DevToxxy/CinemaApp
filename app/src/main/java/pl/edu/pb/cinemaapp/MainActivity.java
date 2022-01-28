@@ -38,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private MovieViewModel movieViewModel;
 
     private FloatingActionButton addMovieButton;
-    //MovieStorage movieStorage = MovieStorage.getInstance(); //TODO:
-
-    //private RecyclerView recyclerView; //TODO
-    //private RecyclerView.Adapter movieAdapter; //TODO
-    //private RecyclerView.LayoutManager layoutManager; //TODO
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //TODO:
-        //List<Movie> movieList = movieStorage.getMovies(); //TODO:
-        //Toast.makeText(this, "movie count " + movieList.size(), Toast.LENGTH_SHORT).show(); //TODO: get rid of
+
 
     }
 

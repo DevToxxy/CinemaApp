@@ -19,7 +19,6 @@ import java.util.List;
 import lombok.NonNull;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>{
-    //public List<Movie> movieList; //TODO:
     private List<Movie> movies = new ArrayList<>();
     private OnItemClickListener listener;
     private Context context;
@@ -66,8 +65,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         return movies.get(position);
     }
 
-//    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-//    }
+
     public interface OnItemClickListener {
         void onItemClick(Movie movie);
     }
@@ -82,7 +80,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         private TextView lengthTextView;
         private ImageView pictureImageView;
 
-       // ConstraintLayout parentLayout; //TODO:
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,7 +99,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
                     }
                 }
             });
-           // parentLayout = itemView.findViewById(R.id.one_movie_layout); //TODO:
 
         }
 
