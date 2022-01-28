@@ -23,7 +23,7 @@ public class AddEditMovie extends AppCompatActivity {
     private String id;
 
     public static final String addingMode = "AddingMode";
-    public static final String extraId = "id";
+    public static final String extraId = "extraId";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
@@ -66,6 +66,11 @@ public class AddEditMovie extends AppCompatActivity {
         data.putExtra(EXTRA_AGE_RATING,age);
         data.putExtra(EXTRA_LENGTH,length);
 
+        int id = getIntent().getIntExtra(extraId, -1);
+        if (id != -1) {
+            data.putExtra(extraId, id);
+        }
+
         setResult(RESULT_OK, data);
         finish();
 
@@ -85,7 +90,18 @@ public class AddEditMovie extends AppCompatActivity {
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_movie_edit);
-        setTitle("Add movie");
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(extraId)) {
+            setTitle("Edit movie");
+            editMovieTitle.setText(intent.getStringExtra(EXTRA_TITLE));
+            editMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
+            editMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
+        }
+        else {
+            setTitle("Add movie");
+        }
 
 //        Intent newIntent = getIntent();
 //        id = newIntent.getExtras().getString(extraId, addingMode);

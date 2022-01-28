@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import lombok.NonNull;
 public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_MOVIE_REQUEST = 1;
+    public static final int EDIT_MOVIE_REQUEST = 2;
     private MovieViewModel movieViewModel;
 
     private FloatingActionButton addMovieButton;
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        MovieAdapter movieAdapter = new MovieAdapter();
+        MovieAdapter movieAdapter = new MovieAdapter(MainActivity.this);
         recyclerView.setAdapter(movieAdapter);
 
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
@@ -88,7 +90,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
+        movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Movie movie) {
+                Intent intent = new Intent(MainActivity.this, AddEditMovie.class);
 
+                intent.putExtra(AddEditMovie.extraId,movie.getId());
+                intent.putExtra(AddEditMovie.EXTRA_TITLE, movie.getTitle());
+                intent.putExtra(AddEditMovie.EXTRA_LENGTH, movie.getLength());
+                intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
+                startActivityForResult(intent, EDIT_MOVIE_REQUEST);
+            }
+        });
+
+        //TODO:
         //List<Movie> movieList = movieStorage.getMovies(); //TODO:
         //Toast.makeText(this, "movie count " + movieList.size(), Toast.LENGTH_SHORT).show(); //TODO: get rid of
 
@@ -109,91 +124,30 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
 
         }
+        else if (requestCode == EDIT_MOVIE_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(AddEditMovie.extraId, -1);
+            if (id == -1) {
+                Toast.makeText(this, "Can't update", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String title = data.getStringExtra(AddEditMovie.EXTRA_TITLE);
+            int ageRating = data.getIntExtra(AddEditMovie.EXTRA_AGE_RATING,3);
+            int length = data.getIntExtra(AddEditMovie.EXTRA_LENGTH,120);
+
+            Movie movie = new Movie(title,ageRating,length);
+            movie.setId(id);
+            movieViewModel.update(movie);
+
+            Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
+
+        }
         else {
             Toast.makeText(this, "Saving aborted", Toast.LENGTH_SHORT).show();
 
         }
     }
 
-    private class MovieAdapter extends RecyclerView.Adapter<MovieHolder>{
-        //public List<Movie> movieList; //TODO:
-        private List<Movie> movies = new ArrayList<>();
-
-        Context context = MainActivity.this;
-
-//        public MovieAdapter(List<Movie> movieList, Context context) { //TODO:
-//            this.movieList = movieList;
-//        }
-
-        @NonNull
-        @Override
-        public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.one_movie, parent, false);
-
-            MovieHolder holder = new MovieHolder(view);
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
-            Movie currentMovie = movies.get(position);
-
-            holder.titleTextView.setText(currentMovie.getTitle());
-            holder.ageTextView.setText(String.valueOf(currentMovie.getAge()));
-            holder.lengthTextView.setText(String.valueOf(currentMovie.getLength()));
-            Glide.with(this.context)
-                    .load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg")
-                    .into(holder.pictureImageView);
-
-//            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(context, AddEditMovie.class);
-//                    UUID tempID = movieList.get(holder.getAdapterPosition()).getId(); //position wyrzuca blad: do not treat position as fixed
-//
-//                    intent.putExtra(AddEditMovie.extraId,tempID.toString());
-//                    context.startActivity(intent);
-//                }
-//            });  //TODO:
-        }
-
-        @Override
-        public int getItemCount() {
-            return movies.size();
-        }
-
-        private void setMovies(List<Movie> movies){
-            this.movies = movies;
-            notifyDataSetChanged();
-        }
-
-        private Movie getMovieAt(int position){
-            return movies.get(position);
-        }
 
 
-    }
-    private class MovieHolder extends RecyclerView.ViewHolder{
-        private TextView titleTextView;
-        private TextView ageTextView;
-        private TextView lengthTextView;
-        private ImageView pictureImageView;
-
-        // ConstraintLayout parentLayout; //TODO:
-
-        public MovieHolder(@NonNull View itemView) {
-            super(itemView);
-
-            titleTextView = itemView.findViewById(R.id.one_movie_title);
-            ageTextView = itemView.findViewById(R.id.one_movie_age_rating);
-            lengthTextView = itemView.findViewById(R.id.one_movie_length);
-
-            pictureImageView = itemView.findViewById(R.id.one_movie_picture);
-
-            // parentLayout = itemView.findViewById(R.id.one_movie_layout); //TODO:
-
-        }
-
-    }
 }
