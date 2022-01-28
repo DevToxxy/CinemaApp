@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
-                //intent.putExtra(AddEditMovie.extraId,AddEditMovie.addingMode);
                 startActivityForResult(intent,ADD_MOVIE_REQUEST);
             }
         });
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@androidx.annotation.NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 movieViewModel.delete(movieAdapter.getMovieAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.successful_deletion, Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             Movie movie = new Movie(title,ageRating,length);
             movieViewModel.insert(movie);
 
-            Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.successful_save, Toast.LENGTH_SHORT).show();
 
             //region Notification handling
 
@@ -130,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "CHANNEL_ID")
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, getString(R.string.channel_id))
                     .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle("New movie!")
-                    .setContentText("You can now buy tickets for: " + title + "!")
+                    .setContentTitle(getString(R.string.notification_title))
+                    .setContentText(R.string.notification_content + title + "!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         else if (requestCode == EDIT_MOVIE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditMovie.extraId, -1);
             if (id == -1) {
-                Toast.makeText(this, "Can't update", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.failed_update, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -158,11 +157,11 @@ public class MainActivity extends AppCompatActivity {
             movie.setId(id);
             movieViewModel.update(movie);
 
-            Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.successful_save, Toast.LENGTH_SHORT).show();
 
         }
         else {
-            Toast.makeText(this, "Saving aborted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.failed_save, Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -170,12 +169,12 @@ public class MainActivity extends AppCompatActivity {
     private void createNotificationChannel() {
         //only api 26+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //CharSequence name = getString(R.string.channel_name);
-            //String description = getString(R.string.channel_description);
+            String channelId = getString(R.string.channel_id);
+            CharSequence name = getString(R.string.channel_name);
+
 
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", "name", importance);
-            channel.setDescription("description");
+            NotificationChannel channel = new NotificationChannel(channelId, name, importance);
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);

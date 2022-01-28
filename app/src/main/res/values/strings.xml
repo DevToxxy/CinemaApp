@@ -9,12 +9,25 @@
     <string name="age_rating_hint">Age Rating</string>
     <string name="length_hint">Length</string>
 
-    <string name="add_movie_button">Add Movie</string>
-
-    <string name="cancel_button">Cancel</string>
-    <string name="confirm_button">Confirm</string>
 
 
+    <string name="channel_id">Movie Notification</string>
+    <string name="channel_name">Movie Notification</string>
+
+    <string name="successful_deletion">Deleted successfully</string>
+    <string name="successful_save">Saved successfully</string>
+    <string name="notification_content">You can now buy tickets for: </string>
+    <string name="notification_title">New movie!</string>
+
+    <string name="failed_update">Can\'t update</string>
+    <string name="failed_save">Saving aborted</string>
+
+    <string name="title_validation_req">Title  is required</string>
+    <string name="rating_validation_req">Rating is required</string>
+    <string name="rating_validation_num">Only numbers allowed. Max number: 99</string>
+    <string name="length_validation_req">Length is required</string>
+    <string name="length_validation_num">Only numbers allowed. Max number: 999</string>
+<!--    <string name=""></string>-->
 
 
 </resources>

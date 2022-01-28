@@ -100,22 +100,22 @@ public class AddEditMovie extends AppCompatActivity {
 
     private boolean CheckAllFields() {
         if (editMovieTitle.length() == 0) {
-            editMovieTitle.setError("Title  is required");
+            editMovieTitle.setError(getString(R.string.title_validation_req));
             return false;
         }
         if (editMovieAgeRating.length() == 0) {
-            editMovieAgeRating.setError("Rating is required");
+            editMovieAgeRating.setError(getString(R.string.rating_validation_req));
             return false;
         } else if (!(editMovieAgeRating.getText().toString().matches("^[0-9]{1,2}$"))) {
-            editMovieAgeRating.setError("Only numbers allowed. Max number:99");
+            editMovieAgeRating.setError(getString(R.string.rating_validation_num));
             return false;
         }
 
         if (editMovieLength.length() == 0) {
-            editMovieLength.setError("Length is required");
+            editMovieLength.setError(getString(R.string.length_validation_req));
             return false;
         } else if (!(editMovieLength.getText().toString().matches("^[0-9]{1,3}$"))) {
-            editMovieLength.setError("Only numbers allowed. Max number:999");
+            editMovieLength.setError(getString(R.string.length_validation_num));
             return false;
         }
 
