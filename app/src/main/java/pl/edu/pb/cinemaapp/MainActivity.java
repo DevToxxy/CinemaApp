@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,6 +72,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,ADD_MOVIE_REQUEST);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@androidx.annotation.NonNull RecyclerView recyclerView,
+                                  @androidx.annotation.NonNull RecyclerView.ViewHolder viewHolder,
+                                  @androidx.annotation.NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@androidx.annotation.NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                movieViewModel.delete(movieAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
 
         //List<Movie> movieList = movieStorage.getMovies(); //TODO:
         //Toast.makeText(this, "movie count " + movieList.size(), Toast.LENGTH_SHORT).show(); //TODO: get rid of
@@ -146,10 +163,15 @@ public class MainActivity extends AppCompatActivity {
             return movies.size();
         }
 
-        public void setMovies(List<Movie> movies){
+        private void setMovies(List<Movie> movies){
             this.movies = movies;
             notifyDataSetChanged();
         }
+
+        private Movie getMovieAt(int position){
+            return movies.get(position);
+        }
+
 
     }
     private class MovieHolder extends RecyclerView.ViewHolder{
