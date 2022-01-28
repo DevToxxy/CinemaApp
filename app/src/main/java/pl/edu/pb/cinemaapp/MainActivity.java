@@ -3,6 +3,8 @@ package pl.edu.pb.cinemaapp;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -10,8 +12,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createNotificationChannel();
 
         RecyclerView recyclerView = findViewById(R.id.movie_list);
 
@@ -116,6 +124,24 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
 
+            //region Notification handling
+
+            Intent intent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "CHANNEL_ID")
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle("New movie!")
+                    .setContentText("You can now buy tickets for: " + title + "!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(1, builder.build());
+            //endregion
+
         }
         else if (requestCode == EDIT_MOVIE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditMovie.extraId, -1);
@@ -138,6 +164,21 @@ public class MainActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "Saving aborted", Toast.LENGTH_SHORT).show();
 
+        }
+    }
+
+    private void createNotificationChannel() {
+        //only api 26+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //CharSequence name = getString(R.string.channel_name);
+            //String description = getString(R.string.channel_description);
+
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", "name", importance);
+            channel.setDescription("description");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 
