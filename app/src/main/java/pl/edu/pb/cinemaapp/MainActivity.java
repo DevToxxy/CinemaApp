@@ -1,7 +1,11 @@
 package pl.edu.pb.cinemaapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,18 +31,35 @@ import lombok.NonNull;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button addMovieButton;
-    MovieStorage movieStorage = MovieStorage.getInstance();
+    public static final int ADD_MOVIE_REQUEST = 1;
+    private MovieViewModel movieViewModel;
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private FloatingActionButton addMovieButton;
+    //MovieStorage movieStorage = MovieStorage.getInstance(); //TODO:
+
+    //private RecyclerView recyclerView; //TODO
+    //private RecyclerView.Adapter movieAdapter; //TODO
+    //private RecyclerView.LayoutManager layoutManager; //TODO
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        RecyclerView recyclerView = findViewById(R.id.movie_list);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        MovieAdapter movieAdapter = new MovieAdapter();
+        recyclerView.setAdapter(movieAdapter);
+
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                movieAdapter.setMovies(movies);
+            }
+        });
 
         addMovieButton = findViewById(R.id.button_add_movie);
 
@@ -44,60 +67,88 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
-                intent.putExtra(AddEditMovie.extraId,AddEditMovie.addingMode);
-                startActivity(intent);
+                //intent.putExtra(AddEditMovie.extraId,AddEditMovie.addingMode);
+                startActivityForResult(intent,ADD_MOVIE_REQUEST);
             }
         });
 
-        List<Movie> movieList = movieStorage.getMovies();
-        Toast.makeText(this, "movie count " + movieList.size(), Toast.LENGTH_SHORT).show(); //TODO: get rid of
-
-        recyclerView = findViewById(R.id.movie_list);
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new MovieAdapter(movieList, MainActivity.this);
-        recyclerView.setAdapter(mAdapter);
-
+        //List<Movie> movieList = movieStorage.getMovies(); //TODO:
+        //Toast.makeText(this, "movie count " + movieList.size(), Toast.LENGTH_SHORT).show(); //TODO: get rid of
 
     }
-    private class MovieAdapter extends RecyclerView.Adapter<MovieHolder>{
-        public List<Movie> movieList;
-        Context context = MainActivity.this;
-        public MovieAdapter(List<Movie> movieList, Context context) {
-            this.movieList = movieList;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ADD_MOVIE_REQUEST && resultCode == RESULT_OK){
+            String title = data.getStringExtra(AddEditMovie.EXTRA_TITLE);
+            int ageRating = data.getIntExtra(AddEditMovie.EXTRA_AGE_RATING,3);
+            int length = data.getIntExtra(AddEditMovie.EXTRA_LENGTH,120);
+
+            Movie movie = new Movie(title,ageRating,length);
+            movieViewModel.insert(movie);
+
+            Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
+
         }
+        else {
+            Toast.makeText(this, "Saving aborted", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private class MovieAdapter extends RecyclerView.Adapter<MovieHolder>{
+        //public List<Movie> movieList; //TODO:
+        private List<Movie> movies = new ArrayList<>();
+
+        Context context = MainActivity.this;
+
+//        public MovieAdapter(List<Movie> movieList, Context context) { //TODO:
+//            this.movieList = movieList;
+//        }
 
         @NonNull
         @Override
         public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_movie, parent, false);
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.one_movie, parent, false);
+
             MovieHolder holder = new MovieHolder(view);
             return holder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
-            holder.titleTextView.setText(movieList.get(position).getTitle());
-            holder.ageTextView.setText(String.valueOf(movieList.get(position).getAge()));
-            holder.lengthTextView.setText(String.valueOf(movieList.get(position).getLength()));
-            Glide.with(this.context).load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg").into(holder.pictureImageView);
-            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, AddEditMovie.class);
-                    UUID tempID = movieList.get(holder.getAdapterPosition()).getId(); //position wyrzuca blad: do not treat position as fixed
+            Movie currentMovie = movies.get(position);
 
-                    intent.putExtra(AddEditMovie.extraId,tempID.toString());
-                    context.startActivity(intent);
-                }
-            });
+            holder.titleTextView.setText(currentMovie.getTitle());
+            holder.ageTextView.setText(String.valueOf(currentMovie.getAge()));
+            holder.lengthTextView.setText(String.valueOf(currentMovie.getLength()));
+            Glide.with(this.context)
+                    .load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg")
+                    .into(holder.pictureImageView);
+
+//            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, AddEditMovie.class);
+//                    UUID tempID = movieList.get(holder.getAdapterPosition()).getId(); //position wyrzuca blad: do not treat position as fixed
+//
+//                    intent.putExtra(AddEditMovie.extraId,tempID.toString());
+//                    context.startActivity(intent);
+//                }
+//            });  //TODO:
         }
 
         @Override
         public int getItemCount() {
-            return movieList.size();
+            return movies.size();
+        }
+
+        public void setMovies(List<Movie> movies){
+            this.movies = movies;
+            notifyDataSetChanged();
         }
 
     }
@@ -107,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView lengthTextView;
         private ImageView pictureImageView;
 
-        ConstraintLayout parentLayout;
+        // ConstraintLayout parentLayout; //TODO:
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
@@ -118,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
             pictureImageView = itemView.findViewById(R.id.one_movie_picture);
 
-            parentLayout = itemView.findViewById(R.id.one_movie_layout);
+            // parentLayout = itemView.findViewById(R.id.one_movie_layout); //TODO:
 
         }
 
