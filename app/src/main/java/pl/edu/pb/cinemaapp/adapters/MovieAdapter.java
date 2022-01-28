@@ -1,27 +1,23 @@
-package pl.edu.pb.cinemaapp;
+package pl.edu.pb.cinemaapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.NonNull;
+import pl.edu.pb.cinemaapp.entities.Movie;
+import pl.edu.pb.cinemaapp.R;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
-    //private List<Movie> movies = new ArrayList<>();
     private OnItemClickListener listener;
     private Context context;
 
@@ -32,20 +28,14 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
     private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
         @Override
         public boolean areItemsTheSame(@androidx.annotation.NonNull Movie oldItem, @androidx.annotation.NonNull Movie newItem) {
-            if (newItem.getId() == oldItem.getId())
-                return true;
-            else
-                return false;
+            return newItem.getId() == oldItem.getId();
         }
 
         @Override
         public boolean areContentsTheSame(@androidx.annotation.NonNull Movie oldItem, @androidx.annotation.NonNull Movie newItem) {
-            if(newItem.getTitle().equals(oldItem.getTitle())
+            return newItem.getTitle().equals(oldItem.getTitle())
                     && newItem.getAge() == oldItem.getAge()
-                    && newItem.getLength() == oldItem.getAge())
-                return true;
-            else
-                return false;
+                    && newItem.getLength() == oldItem.getAge();
         }
     };
     @NonNull
@@ -54,8 +44,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.one_movie, parent, false);
 
-        MovieHolder holder = new MovieHolder(view);
-        return holder;
+        return new MovieHolder(view);
     }
 
     @Override
@@ -102,13 +91,10 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
 
             pictureImageView = itemView.findViewById(R.id.one_movie_picture);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if(listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(getItem(position));
-                    }
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if(listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(getItem(position));
                 }
             });
 

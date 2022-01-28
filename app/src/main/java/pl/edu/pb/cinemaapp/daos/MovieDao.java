@@ -1,4 +1,4 @@
-package pl.edu.pb.cinemaapp;
+package pl.edu.pb.cinemaapp.daos;
 
 
 import androidx.lifecycle.LiveData;
@@ -9,6 +9,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import pl.edu.pb.cinemaapp.entities.Movie;
 
 @Dao
 public interface MovieDao {

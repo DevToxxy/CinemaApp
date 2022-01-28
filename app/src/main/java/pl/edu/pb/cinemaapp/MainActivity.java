@@ -2,11 +2,9 @@ package pl.edu.pb.cinemaapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,27 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import lombok.NonNull;
+import pl.edu.pb.cinemaapp.adapters.MovieAdapter;
+import pl.edu.pb.cinemaapp.entities.Movie;
+import pl.edu.pb.cinemaapp.viewmodels.MovieViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,21 +50,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(movieAdapter);
 
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-        movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                movieAdapter.submitList(movies);
-            }
-        });
+        movieViewModel.getAllMovies().observe(this, movies -> movieAdapter.submitList(movies));
 
         addMovieButton = findViewById(R.id.button_add_movie);
 
-        addMovieButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
-                startActivityForResult(intent,ADD_MOVIE_REQUEST);
-            }
+        addMovieButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,AddEditMovie.class);
+            startActivityForResult(intent,ADD_MOVIE_REQUEST);
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -132,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, getString(R.string.channel_id))
                     .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(getString(R.string.notification_title))
-                    .setContentText(R.string.notification_content + title + "!")
+                    .setContentText(getString(R.string.notification_content) + title + "!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);

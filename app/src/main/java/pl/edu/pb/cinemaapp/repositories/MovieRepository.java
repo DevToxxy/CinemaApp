@@ -1,4 +1,4 @@
-package pl.edu.pb.cinemaapp;
+package pl.edu.pb.cinemaapp.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -6,6 +6,10 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+
+import pl.edu.pb.cinemaapp.entities.Movie;
+import pl.edu.pb.cinemaapp.databases.MovieDatabase;
+import pl.edu.pb.cinemaapp.daos.MovieDao;
 
 public class MovieRepository {
     private MovieDao movieDao;

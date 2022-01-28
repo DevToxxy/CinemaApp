@@ -1,4 +1,4 @@
-package pl.edu.pb.cinemaapp;
+package pl.edu.pb.cinemaapp.viewmodels;
 
 import android.app.Application;
 
@@ -7,6 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+
+import pl.edu.pb.cinemaapp.entities.Movie;
+import pl.edu.pb.cinemaapp.repositories.MovieRepository;
 
 public class MovieViewModel extends AndroidViewModel {
     private MovieRepository repository;
