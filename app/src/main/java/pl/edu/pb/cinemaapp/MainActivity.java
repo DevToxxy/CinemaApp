@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-                movieAdapter.setMovies(movies);
+                movieAdapter.submitList(movies);
             }
         });
 

@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,15 +20,34 @@ import java.util.List;
 
 import lombok.NonNull;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>{
-    private List<Movie> movies = new ArrayList<>();
+public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
+    //private List<Movie> movies = new ArrayList<>();
     private OnItemClickListener listener;
     private Context context;
 
-        public MovieAdapter(Context context) { //TODO:
-            this.context = context;
+    public MovieAdapter(Context context) {
+        super(DIFF_CALLBACK);
+        this.context = context;
+    }
+    private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
+        @Override
+        public boolean areItemsTheSame(@androidx.annotation.NonNull Movie oldItem, @androidx.annotation.NonNull Movie newItem) {
+            if (newItem.getId() == oldItem.getId())
+                return true;
+            else
+                return false;
         }
 
+        @Override
+        public boolean areContentsTheSame(@androidx.annotation.NonNull Movie oldItem, @androidx.annotation.NonNull Movie newItem) {
+            if(newItem.getTitle().equals(oldItem.getTitle())
+                    && newItem.getAge() == oldItem.getAge()
+                    && newItem.getLength() == oldItem.getAge())
+                return true;
+            else
+                return false;
+        }
+    };
     @NonNull
     @Override
     public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,7 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
-        Movie currentMovie = movies.get(position);
+        Movie currentMovie = getItem(position);
 
         holder.titleTextView.setText(currentMovie.getTitle());
         holder.ageTextView.setText(String.valueOf(currentMovie.getAge()));
@@ -51,18 +72,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     }
 
-    @Override
-    public int getItemCount() {
-        return movies.size();
-    }
-
-    public void setMovies(List<Movie> movies){
-        this.movies = movies;
-        notifyDataSetChanged();
-    }
 
     public Movie getMovieAt(int position){
-        return movies.get(position);
+        return getItem(position);
     }
 
 
@@ -95,7 +107,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if(listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(movies.get(position));
+                        listener.onItemClick(getItem(position));
                     }
                 }
             });
