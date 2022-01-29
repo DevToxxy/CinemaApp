@@ -18,6 +18,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -43,6 +46,31 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton addMovieButton;
     private ConstraintLayout mainLayout;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.tickets_activity:
+                openTicketsActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+
+        }
+    }
+
+    private void openTicketsActivity(){
+        Intent intent = new Intent(MainActivity.this, Tickets.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

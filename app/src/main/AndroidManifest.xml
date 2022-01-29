@@ -21,9 +21,11 @@
         android:theme="@style/Theme.CinemaApp">
         <activity
             android:name=".Tickets"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".BuyTicket"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".AddEditMovie"
