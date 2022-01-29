@@ -223,15 +223,21 @@ public class MainActivity extends AppCompatActivity {
             int length = data.getIntExtra(BuyTicket.EXTRA_LENGTH,120);
             int seats = data.getIntExtra(BuyTicket.EXTRA_SEATS_AVAILABLE,40);
 
-            String qrSeed = title+ageRating+length+seats;
-            Ticket ticket = new Ticket(title,qrSeed);
-            ticketViewModel.insert(ticket);
+            if(seats > 0) {
+                String qrSeed = title + ageRating + length + seats;
+                Ticket ticket = new Ticket(title, qrSeed);
+                ticketViewModel.insert(ticket);
 
-//            Movie movie = new Movie(title,ageRating,length,seats - 1); //zabezpieczyc przed zejsciem seats do 0
-//            movie.setId(id);
-//            movieViewModel.update(movie);
+                Movie movie = new Movie(title, ageRating, length, seats - 1); //zabezpieczyc przed zejsciem seats do 0
+                movie.setId(id);
+                movieViewModel.update(movie);
 
-            Toast.makeText(this, "Ticket bought successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Ticket bought successfully", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "All tickets are sold out", Toast.LENGTH_SHORT).show();
+
+            }
 
         }
 
