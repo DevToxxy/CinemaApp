@@ -10,7 +10,6 @@
     <string name="length_hint">Length</string>
 
 
-
     <string name="channel_id">Movie Notification</string>
     <string name="channel_name">Movie Notification</string>
 
@@ -29,10 +28,10 @@
     <string name="length_validation_req">Length is required</string>
     <string name="length_validation_num">Only numbers allowed. Max number: 999</string>
     <string name="raise_brightness">Raising brightness for better ticket scanning</string>
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
 
+    <string name="cancel_button">CANCEL</string>
+    <string name="confirm_button">CONFIRM</string>
+    <!--    <string name=""></string>-->
 
 
 </resources>
