@@ -17,7 +17,7 @@ import pl.edu.pb.cinemaapp.entities.Movie;
 import pl.edu.pb.cinemaapp.daos.MovieDao;
 import pl.edu.pb.cinemaapp.entities.Ticket;
 
-@Database(entities = {Movie.class, Ticket.class}, version = 3)
+@Database(entities = {Movie.class, Ticket.class}, version = 4)
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static MovieDatabase instance;

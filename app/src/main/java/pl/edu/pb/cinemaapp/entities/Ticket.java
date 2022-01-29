@@ -11,8 +11,7 @@ public class Ticket {
     private String movieTitle;
     private String stringForQR;
 
-    public Ticket(int id, String movieTitle, String stringForQR) {
-        this.id = id;
+    public Ticket(String movieTitle, String stringForQR) {
         this.movieTitle = movieTitle;
         this.stringForQR = stringForQR;
     }

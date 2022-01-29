@@ -13,12 +13,12 @@
         android:layout_height="200dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@+id/ticket_movie_title"
+        app:layout_constraintStart_toEndOf="@+id/one_ticket_movie_title"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/ticket_movie_title"
+        android:id="@+id/one_ticket_movie_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

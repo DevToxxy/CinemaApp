@@ -28,7 +28,9 @@ import java.util.List;
 
 import pl.edu.pb.cinemaapp.adapters.MovieAdapter;
 import pl.edu.pb.cinemaapp.entities.Movie;
+import pl.edu.pb.cinemaapp.entities.Ticket;
 import pl.edu.pb.cinemaapp.viewmodels.MovieViewModel;
+import pl.edu.pb.cinemaapp.viewmodels.TicketViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int BUY_TICKET_REQUEST = 3;
 
     private MovieViewModel movieViewModel;
+    private TicketViewModel ticketViewModel;
 
     private FloatingActionButton addMovieButton;
     private ConstraintLayout mainLayout;
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         movieViewModel.getAllMovies().observe(this, movies -> movieAdapter.submitList(movies));
+
+        ticketViewModel = ViewModelProviders.of(this).get(TicketViewModel.class);
+        //ticketViewModel.getAllTickets().observe(this, tickets -> ticketAdapter.submitList(tickets));
 
         addMovieButton = findViewById(R.id.button_add_movie);
 
@@ -110,11 +116,11 @@ public class MainActivity extends AppCompatActivity {
             public void onLongItemClick(Movie movie) {
                 Intent intent = new Intent(MainActivity.this, BuyTicket.class);
 
-                intent.putExtra(AddEditMovie.extraId,movie.getId());
-                intent.putExtra(AddEditMovie.EXTRA_TITLE, movie.getTitle());
-                intent.putExtra(AddEditMovie.EXTRA_LENGTH, movie.getLength());
-                intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
-                intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
+                intent.putExtra(BuyTicket.extraId,movie.getId());
+                intent.putExtra(BuyTicket.EXTRA_TITLE, movie.getTitle());
+                intent.putExtra(BuyTicket.EXTRA_LENGTH, movie.getLength());
+                intent.putExtra(BuyTicket.EXTRA_AGE_RATING, movie.getAge());
+                intent.putExtra(BuyTicket.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
                 startActivityForResult(intent, BUY_TICKET_REQUEST);
             }
@@ -177,6 +183,30 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.successful_save, Toast.LENGTH_SHORT).show();
 
         }
+        else if (requestCode == BUY_TICKET_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(BuyTicket.extraId, -1);
+            if (id == -1) {
+                Toast.makeText(this, "Buying failed", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String title = data.getStringExtra(BuyTicket.EXTRA_TITLE);
+            int ageRating = data.getIntExtra(BuyTicket.EXTRA_AGE_RATING,3);
+            int length = data.getIntExtra(BuyTicket.EXTRA_LENGTH,120);
+            int seats = data.getIntExtra(BuyTicket.EXTRA_SEATS_AVAILABLE,40);
+
+            String qrSeed = title+ageRating+length+seats;
+            Ticket ticket = new Ticket(title,qrSeed);
+            ticketViewModel.insert(ticket);
+
+//            Movie movie = new Movie(title,ageRating,length,seats - 1); //zabezpieczyc przed zejsciem seats do 0
+//            movie.setId(id);
+//            movieViewModel.update(movie);
+
+            Toast.makeText(this, "Ticket bought successfully", Toast.LENGTH_SHORT).show();
+
+        }
+
         else {
             Toast.makeText(this, R.string.failed_save, Toast.LENGTH_SHORT).show();
 
