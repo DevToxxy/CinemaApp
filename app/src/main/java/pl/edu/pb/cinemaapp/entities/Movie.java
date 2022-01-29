@@ -11,14 +11,16 @@ public class Movie {
     private String title;
     private int age;
     private int length;
+    private int seats;
 
     public Movie(){
     }
 
-    public Movie(String title, int age, int length) {
+    public Movie(String title, int age, int length, int seats) {
         this.title = title;
         this.age = age;
         this.length = length;
+        this.seats = seats;
     }
 
     @Override
@@ -61,5 +63,13 @@ public class Movie {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 }

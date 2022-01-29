@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditMovie.EXTRA_TITLE, movie.getTitle());
                 intent.putExtra(AddEditMovie.EXTRA_LENGTH, movie.getLength());
                 intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
+                intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
+
                 startActivityForResult(intent, EDIT_MOVIE_REQUEST);
             }
         });
@@ -113,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra(AddEditMovie.EXTRA_TITLE);
             int ageRating = data.getIntExtra(AddEditMovie.EXTRA_AGE_RATING,3);
             int length = data.getIntExtra(AddEditMovie.EXTRA_LENGTH,120);
+            int seats = data.getIntExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE,40);
 
-            Movie movie = new Movie(title,ageRating,length);
+            Movie movie = new Movie(title,ageRating,length,seats);
             movieViewModel.insert(movie);
 
             Toast.makeText(this, R.string.successful_save, Toast.LENGTH_SHORT).show();
@@ -148,8 +151,9 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra(AddEditMovie.EXTRA_TITLE);
             int ageRating = data.getIntExtra(AddEditMovie.EXTRA_AGE_RATING,3);
             int length = data.getIntExtra(AddEditMovie.EXTRA_LENGTH,120);
+            int seats = data.getIntExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE,40);
 
-            Movie movie = new Movie(title,ageRating,length);
+            Movie movie = new Movie(title,ageRating,length,seats);
             movie.setId(id);
             movieViewModel.update(movie);
 

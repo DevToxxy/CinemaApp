@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import pl.edu.pb.cinemaapp.entities.Movie;
 import pl.edu.pb.cinemaapp.daos.MovieDao;
 
-@Database(entities = {Movie.class}, version = 1)
+@Database(entities = {Movie.class}, version = 2)
 public abstract class MovieDatabase extends RoomDatabase {
 
     private static MovieDatabase instance;
@@ -40,9 +40,9 @@ public abstract class MovieDatabase extends RoomDatabase {
             super.onCreate(db);
             MovieDatabase.databaseWriteExecutor.execute(() -> {
                 MovieDao dao = instance.movieDao();
-                dao.insert(new Movie("Tenet",15, 170));
-                dao.insert(new Movie("Interstellar",18, 160));
-                dao.insert(new Movie("Inception",18, 155));
+                dao.insert(new Movie("Tenet",15, 170, 40));
+                dao.insert(new Movie("Interstellar",18, 160, 40));
+                dao.insert(new Movie("Inception",18, 155, 40));
             });
             //new PopulateDbAsyncTask(instance).execute();
         }

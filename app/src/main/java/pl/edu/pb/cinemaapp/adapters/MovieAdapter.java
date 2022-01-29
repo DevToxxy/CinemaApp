@@ -35,7 +35,8 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         public boolean areContentsTheSame(@androidx.annotation.NonNull Movie oldItem, @androidx.annotation.NonNull Movie newItem) {
             return newItem.getTitle().equals(oldItem.getTitle())
                     && newItem.getAge() == oldItem.getAge()
-                    && newItem.getLength() == oldItem.getAge();
+                    && newItem.getLength() == oldItem.getAge()
+                    && newItem.getSeats() == oldItem.getSeats();
         }
     };
     @NonNull
@@ -54,6 +55,8 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         holder.titleTextView.setText(currentMovie.getTitle());
         holder.ageTextView.setText(String.valueOf(currentMovie.getAge()));
         holder.lengthTextView.setText(String.valueOf(currentMovie.getLength()));
+        holder.seatsTextView.setText(String.valueOf(currentMovie.getSeats()));
+
         Glide.with(context)
                 .load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg")
                 .into(holder.pictureImageView);
@@ -79,6 +82,8 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         private TextView titleTextView;
         private TextView ageTextView;
         private TextView lengthTextView;
+        private TextView seatsTextView;
+
         private ImageView pictureImageView;
 
 
@@ -88,6 +93,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
             titleTextView = itemView.findViewById(R.id.one_movie_title);
             ageTextView = itemView.findViewById(R.id.one_movie_age_rating);
             lengthTextView = itemView.findViewById(R.id.one_movie_length);
+            seatsTextView = itemView.findViewById(R.id.one_movie_available_seats);
 
             pictureImageView = itemView.findViewById(R.id.one_movie_picture);
 

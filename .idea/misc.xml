@@ -4,9 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_close_movie_edit.xml" value="0.2703125" />
-        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_add_edit_movie.xml" value="0.5103734439834025" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_add_edit_movie.xml" value="0.25" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/one_movie.xml" value="0.3500931098696462" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/one_movie.xml" value="0.33" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/menu/add_movie_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

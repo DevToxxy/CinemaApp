@@ -28,7 +28,7 @@ import java.util.UUID;
 
 public class AddEditMovie extends AppCompatActivity implements SensorEventListener {
 
-    private EditText editMovieTitle, editMovieLength, editMovieAgeRating;
+    private EditText editMovieTitle, editMovieLength, editMovieAgeRating, editMovieSeatsAvailable;
 
     //TODO: move to ticket activity
     private Sensor lightSensor;
@@ -39,6 +39,7 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
+    public static final String EXTRA_SEATS_AVAILABLE = "EXTRA_SEATS_AVAILABLE";
 
     boolean isAllFieldsChecked = false;
 
@@ -69,6 +70,7 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
         String title = editMovieTitle.getText().toString();
         int age = Integer.parseInt(editMovieAgeRating.getText().toString());
         int length = Integer.parseInt(editMovieLength.getText().toString());
+        int seats = Integer.parseInt(editMovieSeatsAvailable.getText().toString());
 
 
 
@@ -76,6 +78,7 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
         data.putExtra(EXTRA_TITLE,title);
         data.putExtra(EXTRA_AGE_RATING,age);
         data.putExtra(EXTRA_LENGTH,length);
+        data.putExtra(EXTRA_SEATS_AVAILABLE,seats);
 
         int id = getIntent().getIntExtra(extraId, -1);
         if (id != -1) {
@@ -99,6 +102,7 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
         editMovieTitle = findViewById(R.id.edit_movie_title);
         editMovieLength = findViewById(R.id.edit_movie_length);
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
+        editMovieSeatsAvailable = findViewById(R.id.edit_movie_available_seats);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_movie_edit);
 
@@ -109,6 +113,7 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
             editMovieTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
             editMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
+            editMovieSeatsAvailable.setText(String.valueOf(intent.getIntExtra(EXTRA_SEATS_AVAILABLE, 40)));
         }
         else {
             setTitle("Add movie");
@@ -135,6 +140,14 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
             return false;
         } else if (!(editMovieLength.getText().toString().matches("^[0-9]{1,3}$"))) {
             editMovieLength.setError(getString(R.string.length_validation_num));
+            return false;
+        }
+
+        if (editMovieSeatsAvailable.length() == 0) {
+            editMovieSeatsAvailable.setError("Seats are required");
+            return false;
+        } else if (!(editMovieSeatsAvailable.getText().toString().matches("^[0-9]{1,3}$"))) {
+            editMovieSeatsAvailable.setError("Only numbers allowed. Max number: 999");
             return false;
         }
 
