@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/save_movie"
-        android:title="@string/save"
-        android:icon="@drawable/ic_save_movie"
+        android:id="@+id/buy_ticket"
+        android:title="@string/buy"
+        android:icon="@drawable/ic_purchase_ticket"
         app:showAsAction="ifRoom" />
 </menu>

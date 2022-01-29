@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import lombok.NonNull;
 import pl.edu.pb.cinemaapp.entities.Movie;
@@ -19,6 +20,7 @@ import pl.edu.pb.cinemaapp.R;
 
 public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
     private OnItemClickListener listener;
+    private OnLongItemClickListener longListener;
     private Context context;
 
     public MovieAdapter(Context context) {
@@ -78,6 +80,14 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         this.listener = listener;
     }
 
+    public interface OnLongItemClickListener {
+        void onLongItemClick(Movie movie);
+    }
+
+    public void setOnLongItemClickListener(OnLongItemClickListener longListener) {
+        this.longListener = longListener;
+    }
+
     protected class MovieHolder extends RecyclerView.ViewHolder{
         private TextView titleTextView;
         private TextView ageTextView;
@@ -102,6 +112,14 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
                 if(listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(getItem(position));
                 }
+            });
+
+            itemView.setOnLongClickListener(v -> {
+                int position = getAdapterPosition();
+                if(longListener != null && position != RecyclerView.NO_POSITION) {
+                    longListener.onLongItemClick(getItem(position));
+                }
+                return true;
             });
 
         }

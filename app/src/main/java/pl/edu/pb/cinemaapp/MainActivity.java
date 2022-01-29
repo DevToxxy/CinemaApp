@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_MOVIE_REQUEST = 1;
     public static final int EDIT_MOVIE_REQUEST = 2;
+    public static final int BUY_TICKET_REQUEST = 3;
+
     private MovieViewModel movieViewModel;
 
     private FloatingActionButton addMovieButton;
@@ -100,6 +102,21 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
                 startActivityForResult(intent, EDIT_MOVIE_REQUEST);
+            }
+        });
+
+        movieAdapter.setOnLongItemClickListener(new MovieAdapter.OnLongItemClickListener() {
+            @Override
+            public void onLongItemClick(Movie movie) {
+                Intent intent = new Intent(MainActivity.this, BuyTicket.class);
+
+                intent.putExtra(AddEditMovie.extraId,movie.getId());
+                intent.putExtra(AddEditMovie.EXTRA_TITLE, movie.getTitle());
+                intent.putExtra(AddEditMovie.EXTRA_LENGTH, movie.getLength());
+                intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
+                intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
+
+                startActivityForResult(intent, BUY_TICKET_REQUEST);
             }
         });
 
