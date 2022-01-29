@@ -1,9 +1,11 @@
 package pl.edu.pb.cinemaapp.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +14,11 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import lombok.NonNull;
 import pl.edu.pb.cinemaapp.R;
@@ -51,12 +58,28 @@ public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolde
     public void onBindViewHolder(@NonNull TicketAdapter.TicketHolder holder, int position) {
         Ticket currentTicket = getItem(position);
 
+        //region QR Code
+        String qrText = currentTicket.getStringForQR().trim();
+        MultiFormatWriter writer = new MultiFormatWriter();
+        try {
+            BitMatrix matrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 200, 200);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            Bitmap bitmap = encoder.createBitmap(matrix);
+
+            Glide.with(context)
+                    .asBitmap()
+                    .load(bitmap)
+                    .into(holder.pictureImageView);
+
+            InputMethodManager manager = (InputMethodManager) context.getSystemService(
+                    Context.INPUT_METHOD_SERVICE
+            );
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        //endregion
         holder.movieTitleTextView.setText(currentTicket.getMovieTitle());
-
-        Glide.with(context)
-                .load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg")
-                .into(holder.pictureImageView);
-
 
     }
 
