@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private Sensor accelerometerSensor ;
     private SensorManager sensorManager;
-    private int currentBrightness;
 
+    private int upsideDownZAxis = -9;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if(event.values[1] < -9)
+        if(event.values[1] < upsideDownZAxis)
         {
             finishAndRemoveTask();
         }
