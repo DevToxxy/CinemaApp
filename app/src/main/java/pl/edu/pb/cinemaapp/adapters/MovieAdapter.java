@@ -37,7 +37,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         public boolean areContentsTheSame(@androidx.annotation.NonNull Movie oldItem, @androidx.annotation.NonNull Movie newItem) {
             return newItem.getTitle().equals(oldItem.getTitle())
                     && newItem.getAge() == oldItem.getAge()
-                    && newItem.getLength() == oldItem.getAge()
+                    && newItem.getLength() == oldItem.getLength()
                     && newItem.getSeats() == oldItem.getSeats();
         }
     };

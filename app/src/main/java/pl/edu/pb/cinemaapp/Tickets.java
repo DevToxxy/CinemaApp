@@ -47,7 +47,7 @@ public class Tickets extends AppCompatActivity implements SensorEventListener {
 
         ticketViewModel = ViewModelProviders.of(this).get(TicketViewModel.class);
         ticketViewModel.getAllTickets().observe(this, tickets -> ticketAdapter.submitList(tickets));
-
+        //ticketViewModel.deleteAllTickets(); //for cleaning tickets from DB
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_movie_edit);
 
 

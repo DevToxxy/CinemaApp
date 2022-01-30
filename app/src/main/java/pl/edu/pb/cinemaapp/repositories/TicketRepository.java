@@ -38,6 +38,11 @@ public class TicketRepository {
         });
 
     }
+    public void deleteAllTickets(){
+        MovieDatabase.databaseWriteExecutor.execute(() -> {
+            ticketDao.deleteAllTickets();
+        });
+    }
 
     public LiveData<List<Ticket>> getAllTickets() {
         return allTickets;

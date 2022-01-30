@@ -24,6 +24,9 @@ public interface TicketDao {
     @Delete
     void delete(Ticket ticket);
 
+    @Query("DELETE FROM ticket_table")
+    void deleteAllTickets();
+
     @Query("SELECT * FROM ticket_table")
     LiveData<List<Ticket>> getAllTickets();
 

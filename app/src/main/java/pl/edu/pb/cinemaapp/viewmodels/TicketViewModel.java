@@ -30,6 +30,9 @@ public class TicketViewModel extends AndroidViewModel {
     public void delete(Ticket ticket){
         repository.delete(ticket);
     }
+    public void deleteAllTickets(){
+        repository.deleteAllTickets();
+    }
 
     public LiveData<List<Ticket>> getAllTickets() {
         return allTickets;
