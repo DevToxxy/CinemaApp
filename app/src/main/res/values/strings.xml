@@ -1,7 +1,7 @@
 <resources>
 
-    <string name="channel_id">Movie Notification</string>
-    <string name="channel_name">Movie Notification</string>
+    <string name="channel_id" translatable="false">Movie Notification</string>
+    <string name="channel_name" translatable="false">Movie Notification</string>
 
 
     <!--    <string name="cancel_button">CANCEL</string>-->
@@ -10,7 +10,7 @@
     <string name="buy">Buy</string>
     <string name="tickets">Tickets</string>
 
-    <string name="app_name">Cinema Tickets App</string>
+    <string name="app_name" translatable="false">Cinema Tickets App</string>
 
     <string name="movie_title_label">Title:</string>
     <string name="age_rating_label">Age Rating:</string>

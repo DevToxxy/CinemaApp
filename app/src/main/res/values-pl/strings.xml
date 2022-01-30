@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save">Zapisz</string>
+    <string name="buy">Kup</string>
+    <string name="tickets">Bilety</string>
+    <string name="movie_title_label">Tytuł:</string>
+    <string name="age_rating_label">Od lat:</string>
+    <string name="length_label">Długość filmu:</string>
+    <string name="seats_label">Miejsca:</string>
+    <string name="movie_title_hint">Tytuł</string>
+    <string name="age_rating_hint">Od lat</string>
+    <string name="length_hint">Długość filmu</string>
+    <string name="seats_hint">Miejsca</string>
+    <string name="successful_deletion">Usunięto pomyślnie</string>
+    <string name="successful_save">Zapisano pomyślnie</string>
+    <string name="notification_content">"Możesz teraz kupić bilety na: "</string>
+    <string name="notification_title">Nowy film!</string>
+    <string name="undo_movie_delete">Przywrócono film</string>
+    <string name="failed_update">Nie można zaktualizować</string>
+    <string name="failed_save">Przerwano zapisywanie</string>
+    <string name="raise_brightness">Zwiększanie jasności ekranu w celu ułatwienia skanowania biletu</string>
+    <string name="successful_ticket_buy">Bilet zakupiony pomyślnie</string>
+    <string name="not_enough_tickets">Wszystkie bilety zostały wyprzedane</string>
+    <string name="title_validation_req">Tytuł jest wymagany</string>
+    <string name="rating_validation_req">Klasyfikacja jest wymagana</string>
+    <string name="length_validation_req">Długość filmu jest wymagana</string>
+    <string name="seats_validation_req">Miejsca są wymagane</string>
+    <string name="rating_validation_num">Dozwolone tylko liczby. Największa liczba: 99</string>
+    <string name="length_validation_num">Dozwolone tylko liczby. Największa liczba: 999</string>
+    <string name="seats_validation_num">Dozwolone tylko liczby. Największa liczba: 999</string>
+    <string name="activity_title_edit">Edytuj Film</string>
+    <string name="activity_title_add">Dodaj Film</string>
+    <string name="activity_title_buy_ticket">Kup Bilet</string>
+    <string name="activity_title_tickets">Twoje Bilety</string>
+    <string name="button_reviews">Przeczytaj recenzje filmu</string>
+</resources>
