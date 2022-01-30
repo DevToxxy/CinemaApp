@@ -28,8 +28,8 @@
             android:ems="10"
             android:hint="@string/movie_title_hint"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textSize="24sp" />
+            android:minHeight="@dimen/edit_text_min_height"
+            android:textSize="@dimen/big_font" />
 
     </LinearLayout>
 
@@ -55,8 +55,8 @@
             android:ems="10"
             android:hint="@string/age_rating_hint"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textSize="24sp" />
+            android:minHeight="@dimen/edit_text_min_height"
+            android:textSize="@dimen/big_font" />
 
     </LinearLayout>
 
@@ -81,8 +81,8 @@
             android:ems="10"
             android:hint="@string/length_hint"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textSize="24sp" />
+            android:minHeight="@dimen/edit_text_min_height"
+            android:textSize="@dimen/big_font" />
 
     </LinearLayout>
     <LinearLayout
@@ -106,8 +106,8 @@
             android:ems="10"
             android:hint="@string/seats_hint"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textSize="24sp" />
+            android:minHeight="@dimen/edit_text_min_height"
+            android:textSize="@dimen/big_font" />
 
     </LinearLayout>
 

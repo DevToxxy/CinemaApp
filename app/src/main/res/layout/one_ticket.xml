@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/one_ticket_picture"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="@dimen/qr_width"
+        android:layout_height="@dimen/qr_height"
+        android:layout_marginStart="@dimen/big_margin"
+        android:layout_marginTop="@dimen/big_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -21,18 +21,18 @@
         android:id="@+id/one_ticket_movie_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
-        android:text="TextView"
+        android:layout_marginStart="@dimen/big_margin"
+        android:layout_marginTop="@dimen/huge_margin"
+        android:text="@string/movie_title_hint"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/one_ticket_picture"
         app:layout_constraintTop_toTopOf="@+id/one_ticket_picture" />
 
     <View
         android:id="@+id/divider"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/no_margin"
         android:layout_height="@dimen/small_margin"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/big_margin"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
