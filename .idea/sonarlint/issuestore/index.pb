@@ -25,5 +25,3 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 b
 2app/src/main/java/pl/edu/pb/cinemaapp/Tickets.java,5\b\5b60c5752158cbb9d7e709f936fbc0dcac52857f
-p
-@app/src/main/java/pl/edu/pb/cinemaapp/adapters/MovieAdapter.java,e\a\eab987c778a71e7a1e169a16f5afdeb16bac5a7c

@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
-                Intent intent = new Intent(MainActivity.this, AddEditMovie.class);
+                Intent intent = new Intent(MainActivity.this, BuyTicket.class);
 
                 intent.putExtra(AddEditMovie.extraId,movie.getId());
                 intent.putExtra(AddEditMovie.EXTRA_TITLE, movie.getTitle());
@@ -135,14 +135,15 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
                 intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
-                startActivityForResult(intent, EDIT_MOVIE_REQUEST);
+                startActivityForResult(intent, BUY_TICKET_REQUEST);
+
             }
         });
 
         movieAdapter.setOnLongItemClickListener(new MovieAdapter.OnLongItemClickListener() {
             @Override
             public void onLongItemClick(Movie movie) {
-                Intent intent = new Intent(MainActivity.this, BuyTicket.class);
+                Intent intent = new Intent(MainActivity.this, AddEditMovie.class);
 
                 intent.putExtra(BuyTicket.extraId,movie.getId());
                 intent.putExtra(BuyTicket.EXTRA_TITLE, movie.getTitle());
@@ -150,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(BuyTicket.EXTRA_AGE_RATING, movie.getAge());
                 intent.putExtra(BuyTicket.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
-                startActivityForResult(intent, BUY_TICKET_REQUEST);
+                startActivityForResult(intent, EDIT_MOVIE_REQUEST);
+
             }
         });
 
