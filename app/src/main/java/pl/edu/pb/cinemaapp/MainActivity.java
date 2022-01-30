@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if(event.values[1] < -9)
         {
-            System.exit(0);
+            finishAndRemoveTask();
         }
         else return;
     }
