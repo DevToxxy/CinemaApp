@@ -23,16 +23,6 @@ public class Movie {
         this.seats = seats;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", age=" + age +
-                ", length=" + length +
-                '}';
-    }
-
     public int getId() {
         return id;
     }

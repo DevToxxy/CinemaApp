@@ -2,40 +2,19 @@ package pl.edu.pb.cinemaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.hardware.lights.Light;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.List;
-import java.util.UUID;
 
-//TODO: remember to remove implements
-
-public class AddEditMovie extends AppCompatActivity implements SensorEventListener {
+public class AddEditMovie extends AppCompatActivity {
 
     private EditText editMovieTitle, editMovieLength, editMovieAgeRating, editMovieSeatsAvailable;
 
-    //TODO: move to ticket activity
-    private Sensor lightSensor;
-    private SensorManager sensorManager;
-
-
-    public static final String extraId = "extraId";
+    public static final String EXTRA_ID = "EXTRA_ID";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
@@ -80,9 +59,9 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
         data.putExtra(EXTRA_LENGTH,length);
         data.putExtra(EXTRA_SEATS_AVAILABLE,seats);
 
-        int id = getIntent().getIntExtra(extraId, -1);
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
-            data.putExtra(extraId, id);
+            data.putExtra(EXTRA_ID, id);
         }
 
         setResult(RESULT_OK, data);
@@ -94,11 +73,6 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_movie);
 
-        //TODO: move to ticket activity
-        askPermission(this);
-        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-
         editMovieTitle = findViewById(R.id.edit_movie_title);
         editMovieLength = findViewById(R.id.edit_movie_length);
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
@@ -108,15 +82,15 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra(extraId)) {
-            setTitle("Edit movie");
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle(R.string.activity_title_edit);
             editMovieTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
             editMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
             editMovieSeatsAvailable.setText(String.valueOf(intent.getIntExtra(EXTRA_SEATS_AVAILABLE, 40)));
         }
         else {
-            setTitle("Add movie");
+            setTitle(R.string.activity_title_add);
         }
 
 
@@ -144,56 +118,15 @@ public class AddEditMovie extends AppCompatActivity implements SensorEventListen
         }
 
         if (editMovieSeatsAvailable.length() == 0) {
-            editMovieSeatsAvailable.setError("Seats are required");
+            editMovieSeatsAvailable.setError(getString(R.string.seats_validation_req));
             return false;
         } else if (!(editMovieSeatsAvailable.getText().toString().matches("^[0-9]{1,3}$"))) {
-            editMovieSeatsAvailable.setError("Only numbers allowed. Max number: 999");
+            editMovieSeatsAvailable.setError(getString(R.string.seats_validation_num));
             return false;
         }
 
         return true;
     }
 
-    //TODO: move to ticket class
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(lightSensor != null){
-            sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        sensorManager.unregisterListener(this);
-
-
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if(event.values[0] < 1000)
-        {
-            Toast.makeText(this, getString(R.string.raise_brightness), Toast.LENGTH_SHORT).show();
-            android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS,255);
-        }
-        else return;
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
-    public void askPermission(Context context){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if(Settings.System.canWrite(context)){
-                //permission is granted
-            }
-            else{
-                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                context.startActivity(intent);
-            }
-    }
 }

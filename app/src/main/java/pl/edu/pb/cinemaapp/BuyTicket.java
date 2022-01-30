@@ -11,14 +11,12 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 public class BuyTicket extends AppCompatActivity {
 
     private TextView buyTicketMovieTitle, buyTicketMovieLength, buyTicketMovieAgeRating, buyTicketMovieSeatsAvailable;
     private Button readReviewsButton;
 
-    public static final String extraId = "extraId";
+    public static final String EXTRA_ID = "EXTRA_ID";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
@@ -58,9 +56,9 @@ public class BuyTicket extends AppCompatActivity {
         data.putExtra(EXTRA_LENGTH,length);
         data.putExtra(EXTRA_SEATS_AVAILABLE,seats);
 
-        int id = getIntent().getIntExtra(extraId, -1);
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
-            data.putExtra(extraId, id);
+            data.putExtra(EXTRA_ID, id);
         }
 
         setResult(RESULT_OK, data);
@@ -72,6 +70,9 @@ public class BuyTicket extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_ticket);
+        setTitle(R.string.activity_title_buy_ticket);
+
+
         buyTicketMovieTitle = findViewById(R.id.buy_ticket_movie_title);
         buyTicketMovieLength = findViewById(R.id.buy_ticket_movie_length);
         buyTicketMovieAgeRating = findViewById(R.id.buy_ticket_rating);

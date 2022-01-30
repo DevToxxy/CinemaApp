@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,17 +16,13 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.List;
 
 import pl.edu.pb.cinemaapp.adapters.MovieAdapter;
 import pl.edu.pb.cinemaapp.entities.Movie;
@@ -92,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         movieViewModel.getAllMovies().observe(this, movies -> movieAdapter.submitList(movies));
 
         ticketViewModel = ViewModelProviders.of(this).get(TicketViewModel.class);
-        //ticketViewModel.getAllTickets().observe(this, tickets -> ticketAdapter.submitList(tickets));
 
         addMovieButton = findViewById(R.id.button_add_movie);
 
@@ -127,15 +121,16 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
-                Intent intent = new Intent(MainActivity.this, BuyTicket.class);
+                Intent intent = new Intent(MainActivity.this, AddEditMovie.class);
 
-                intent.putExtra(AddEditMovie.extraId,movie.getId());
+                intent.putExtra(AddEditMovie.EXTRA_ID,movie.getId());
                 intent.putExtra(AddEditMovie.EXTRA_TITLE, movie.getTitle());
                 intent.putExtra(AddEditMovie.EXTRA_LENGTH, movie.getLength());
                 intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
                 intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
-                startActivityForResult(intent, BUY_TICKET_REQUEST);
+                startActivityForResult(intent, EDIT_MOVIE_REQUEST);
+
 
             }
         });
@@ -143,15 +138,15 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter.setOnLongItemClickListener(new MovieAdapter.OnLongItemClickListener() {
             @Override
             public void onLongItemClick(Movie movie) {
-                Intent intent = new Intent(MainActivity.this, AddEditMovie.class);
+                Intent intent = new Intent(MainActivity.this, BuyTicket.class);
 
-                intent.putExtra(BuyTicket.extraId,movie.getId());
+                intent.putExtra(BuyTicket.EXTRA_ID,movie.getId());
                 intent.putExtra(BuyTicket.EXTRA_TITLE, movie.getTitle());
                 intent.putExtra(BuyTicket.EXTRA_LENGTH, movie.getLength());
                 intent.putExtra(BuyTicket.EXTRA_AGE_RATING, movie.getAge());
                 intent.putExtra(BuyTicket.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
-                startActivityForResult(intent, EDIT_MOVIE_REQUEST);
+                startActivityForResult(intent, BUY_TICKET_REQUEST);
 
             }
         });
@@ -195,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else if (requestCode == EDIT_MOVIE_REQUEST && resultCode == RESULT_OK) {
-            int id = data.getIntExtra(AddEditMovie.extraId, -1);
+            int id = data.getIntExtra(AddEditMovie.EXTRA_ID, -1);
             if (id == -1) {
                 Toast.makeText(this, R.string.failed_update, Toast.LENGTH_SHORT).show();
                 return;
@@ -214,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else if (requestCode == BUY_TICKET_REQUEST && resultCode == RESULT_OK) {
-            int id = data.getIntExtra(BuyTicket.extraId, -1);
+            int id = data.getIntExtra(BuyTicket.EXTRA_ID, -1);
             if (id == -1) {
                 Toast.makeText(this, "Buying failed", Toast.LENGTH_SHORT).show();
                 return;
@@ -230,14 +225,14 @@ public class MainActivity extends AppCompatActivity {
                 Ticket ticket = new Ticket(title, qrSeed);
                 ticketViewModel.insert(ticket);
 
-                Movie movie = new Movie(title, ageRating, length, seats - 1); //zabezpieczyc przed zejsciem seats do 0
+                Movie movie = new Movie(title, ageRating, length, seats - 1);
                 movie.setId(id);
                 movieViewModel.update(movie);
 
-                Toast.makeText(this, "Ticket bought successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.successful_ticket_buy, Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(this, "All tickets are sold out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.not_enough_tickets, Toast.LENGTH_SHORT).show();
 
             }
 

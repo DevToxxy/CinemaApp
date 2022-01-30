@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="Length:"
+            android:text="@string/length_label"
             android:textSize="@dimen/big_font" />
 
         <EditText
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="Available Seats:"
+            android:text="@string/seats_label"
             android:textSize="@dimen/big_font" />
 
         <EditText
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:ems="10"
-            android:hint="Available Seats"
+            android:hint="@string/seats_hint"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:textSize="24sp" />

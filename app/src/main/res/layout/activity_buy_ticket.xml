@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/movie_title_label"
+            android:text="@string/movie_title_hint"
             android:textSize="@dimen/big_font" />
 
     </LinearLayout>
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/movie_title_label"
+            android:text="@string/age_rating_hint"
             android:textSize="@dimen/big_font" />
 
     </LinearLayout>
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="Length:"
+            android:text="@string/length_label"
             android:textSize="@dimen/big_font" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/movie_title_label"
+            android:text="@string/length_hint"
             android:textSize="@dimen/big_font" />
 
     </LinearLayout>
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="Available Seats:"
+            android:text="@string/seats_label"
             android:textSize="@dimen/big_font" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/movie_title_label"
+            android:text="@string/seats_hint"
             android:textSize="@dimen/big_font" />
 
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Read movie reviews"
+            android:text="@string/button_reviews"
             android:layout_marginLeft="@dimen/big_margin"
             android:layout_marginRight="@dimen/big_margin"/>
     </LinearLayout>

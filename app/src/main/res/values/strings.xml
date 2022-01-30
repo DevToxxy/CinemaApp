@@ -8,16 +8,19 @@
     <!--    <string name="confirm_button">CONFIRM</string>-->
     <string name="save">Save</string>
     <string name="buy">Buy</string>
+    <string name="tickets">Tickets</string>
 
-    <string name="app_name">CinemaApp</string>
+    <string name="app_name">Cinema Tickets App</string>
 
     <string name="movie_title_label">Title:</string>
     <string name="age_rating_label">Age Rating:</string>
     <string name="length_label">Length:</string>
+    <string name="seats_label">Seats:</string>
 
     <string name="movie_title_hint">Title</string>
     <string name="age_rating_hint">Age Rating</string>
     <string name="length_hint">Length</string>
+    <string name="seats_hint">Seats</string>
 
 
 
@@ -28,19 +31,39 @@
     <string name="notification_content">You can now buy tickets for: </string>
     <string name="notification_title">New movie!</string>
     <string name="undo_movie_delete">Movie restored</string>
-
     <string name="failed_update">Can\'t update</string>
     <string name="failed_save">Saving aborted</string>
+    <string name="raise_brightness">Raising brightness for easier ticket scanning</string>
+    <string name="successful_ticket_buy">Ticket bought successfully</string>
+    <string name="not_enough_tickets">All tickets are sold out</string>
 
-    <string name="title_validation_req">Title  is required</string>
+
+
+    <string name="title_validation_req">Title is required</string>
     <string name="rating_validation_req">Rating is required</string>
-    <string name="rating_validation_num">Only numbers allowed. Max number: 99</string>
     <string name="length_validation_req">Length is required</string>
+    <string name="seats_validation_req">Seats are required</string>
+
+    <string name="rating_validation_num">Only numbers allowed. Max number: 99</string>
     <string name="length_validation_num">Only numbers allowed. Max number: 999</string>
-    <string name="raise_brightness">Raising brightness for better ticket scanning</string>
+    <string name="seats_validation_num">Only numbers allowed. Max number: 999</string>
+
+    <string name="activity_title_edit">Edit Movie</string>
+    <string name="activity_title_add">Add Movie</string>
+    <string name="activity_title_buy_ticket">Buy Ticket</string>
+    <string name="activity_title_tickets">Your Tickets</string>
 
 
-    <!--    <string name=""></string>-->
 
+<!--    <string name=""></string>-->
+
+
+
+
+    <string name="button_reviews">Read movie reviews</string>
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
 
 </resources>

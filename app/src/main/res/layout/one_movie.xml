@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="TextView"
+        android:text="@string/movie_title_hint"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/one_movie_picture" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/small_margin"
-        android:text="TextView"
+        android:text="@string/age_rating_hint"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/one_movie_title" />
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/small_margin"
-        android:text="TextView"
+        android:text="@string/length_hint"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/one_movie_age_rating" />
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="Title:"
+        android:text="@string/movie_title_label"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
         app:layout_constraintTop_toTopOf="@+id/one_movie_picture" />
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/small_margin"
-        android:text="Age Rating:"
+        android:text="@string/age_rating_label"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/small_margin"
-        android:text="Length:"
+        android:text="@string/length_label"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Seats:"
+        android:text="@string/seats_label"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:text="@string/seats_hint"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/one_movie_length" />
