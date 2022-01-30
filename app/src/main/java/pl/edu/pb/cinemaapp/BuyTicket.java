@@ -3,15 +3,20 @@ package pl.edu.pb.cinemaapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BuyTicket extends AppCompatActivity {
 
     private TextView buyTicketMovieTitle, buyTicketMovieLength, buyTicketMovieAgeRating, buyTicketMovieSeatsAvailable;
+    private Button readReviewsButton;
 
     public static final String extraId = "extraId";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
@@ -80,5 +85,17 @@ public class BuyTicket extends AppCompatActivity {
         buyTicketMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
         buyTicketMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
         buyTicketMovieSeatsAvailable.setText(String.valueOf(intent.getIntExtra(EXTRA_SEATS_AVAILABLE, 40)));
+
+
+        readReviewsButton = findViewById(R.id.button_read_reviews);
+
+        readReviewsButton.setOnClickListener(v -> {
+            String movieUri = "https://www.rottentomatoes.com/m/" + intent.getStringExtra(EXTRA_TITLE);
+            Intent reviewIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(movieUri));
+            startActivity(reviewIntent);
+        });
+
+
+
     }
 }

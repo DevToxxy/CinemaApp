@@ -13,6 +13,13 @@
     <string name="channel_id">Movie Notification</string>
     <string name="channel_name">Movie Notification</string>
 
+
+<!--    <string name="cancel_button">CANCEL</string>-->
+<!--    <string name="confirm_button">CONFIRM</string>-->
+    <string name="save">Save</string>
+    <string name="buy">Buy</string>
+
+
     <string name="successful_deletion">Deleted successfully</string>
     <string name="successful_save">Saved successfully</string>
     <string name="notification_content">You can now buy tickets for: </string>
@@ -29,10 +36,7 @@
     <string name="length_validation_num">Only numbers allowed. Max number: 999</string>
     <string name="raise_brightness">Raising brightness for better ticket scanning</string>
 
-    <string name="cancel_button">CANCEL</string>
-    <string name="confirm_button">CONFIRM</string>
-    <string name="save">Save</string>
-    <string name="buy">Buy</string>
+
     <!--    <string name=""></string>-->
 
 
