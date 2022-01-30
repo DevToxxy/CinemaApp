@@ -13,9 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,7 +36,7 @@ import pl.edu.pb.cinemaapp.entities.Ticket;
 import pl.edu.pb.cinemaapp.viewmodels.MovieViewModel;
 import pl.edu.pb.cinemaapp.viewmodels.TicketViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     public static final int ADD_MOVIE_REQUEST = 1;
     public static final int EDIT_MOVIE_REQUEST = 2;
@@ -42,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addMovieButton;
     private ConstraintLayout mainLayout;
 
+
+    private Sensor accelerometerSensor ;
+    private SensorManager sensorManager;
+    private int currentBrightness;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        askPermission(this);
+        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
 
         mainLayout = findViewById(R.id.main_layout);
 
@@ -151,6 +166,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(accelerometerSensor != null){
+            sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
 
 
     }
@@ -260,5 +291,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(event.values[1] < -9)
+        {
+            System.exit(0);
+        }
+        else return;
+    }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 }
