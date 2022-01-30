@@ -1,4 +1,14 @@
 <resources>
+
+    <string name="channel_id">Movie Notification</string>
+    <string name="channel_name">Movie Notification</string>
+
+
+    <!--    <string name="cancel_button">CANCEL</string>-->
+    <!--    <string name="confirm_button">CONFIRM</string>-->
+    <string name="save">Save</string>
+    <string name="buy">Buy</string>
+
     <string name="app_name">CinemaApp</string>
 
     <string name="movie_title_label">Title:</string>
@@ -10,14 +20,7 @@
     <string name="length_hint">Length</string>
 
 
-    <string name="channel_id">Movie Notification</string>
-    <string name="channel_name">Movie Notification</string>
 
-
-<!--    <string name="cancel_button">CANCEL</string>-->
-<!--    <string name="confirm_button">CONFIRM</string>-->
-    <string name="save">Save</string>
-    <string name="buy">Buy</string>
 
 
     <string name="successful_deletion">Deleted successfully</string>

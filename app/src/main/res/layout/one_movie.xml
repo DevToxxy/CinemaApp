@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/one_movie_picture"
-        android:layout_width="149dp"
+        android:layout_width="150dp"
         android:layout_height="160dp"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/small_margin"
@@ -52,9 +52,9 @@
 
     <View
         android:id="@+id/divider"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="@dimen/small_margin"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +64,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Title:"
         android:textSize="@dimen/big_font"
         app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
@@ -73,6 +74,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/small_margin"
         android:text="Age Rating:"
         android:textSize="@dimen/big_font"
@@ -83,6 +85,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/small_margin"
         android:text="Length:"
         android:textSize="@dimen/big_font"
@@ -93,6 +96,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Seats:"
         android:textSize="@dimen/big_font"

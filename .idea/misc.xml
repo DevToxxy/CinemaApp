@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_add_movie.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_buy_ticket.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_close_movie_edit.xml" value="0.2703125" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_purchase_ticket.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_save_movie.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/drawable/ic_ticket.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_add_edit_movie.xml" value="0.25" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_buy_ticket.xml" value="0.40185185185185185" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/activity_tickets.xml" value="0.2515625" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/buy_ticket.xml" value="0.2515625" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/one_movie.xml" value="0.33" />
-        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/one_ticket.xml" value="0.2515625" />
+        <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/layout/one_ticket.xml" value="0.5" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/menu/add_movie_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/menu/buy_ticket_menu.xml" value="0.2515625" />
         <entry key="..\:/Users/Toxxy/Desktop/CinemaApp/app/src/main/res/menu/main.xml" value="0.2515625" />
