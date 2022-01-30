@@ -1,7 +1,6 @@
 package pl.edu.pb.cinemaapp.repositories;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
@@ -22,19 +21,16 @@ public class MovieRepository {
     }
 
     public void insert(Movie movie){
-//        new InsertMovieAsyncTask(movieDao).execute(movie);
         MovieDatabase.databaseWriteExecutor.execute(() -> {
             movieDao.insert(movie);
         });
     }
     public void update(Movie movie){
-//        new UpdateMovieAsyncTask(movieDao).execute(movie);
         MovieDatabase.databaseWriteExecutor.execute(() -> {
             movieDao.update(movie);
         });
     }
     public void delete(Movie movie){
-//        new DeleteMovieAsyncTask(movieDao).execute(movie);
         MovieDatabase.databaseWriteExecutor.execute(() -> {
             movieDao.delete(movie);
         });
@@ -45,45 +41,4 @@ public class MovieRepository {
         return allMovies;
     }
 
-//    private static class InsertMovieAsyncTask extends AsyncTask<Movie, Void, Void>{
-//        private MovieDao movieDao;
-//
-//        private InsertMovieAsyncTask(MovieDao movieDao){
-//            this.movieDao = movieDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Movie... movies){
-//            movieDao.insert(movies[0]);
-//            return null;
-//        }
-//    }
-//
-//    private static class UpdateMovieAsyncTask extends AsyncTask<Movie, Void, Void>{
-//        private MovieDao movieDao;
-//
-//        private UpdateMovieAsyncTask(MovieDao movieDao){
-//            this.movieDao = movieDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Movie... movies){
-//            movieDao.update(movies[0]);
-//            return null;
-//        }
-//    }
-//
-//    private static class DeleteMovieAsyncTask extends AsyncTask<Movie, Void, Void>{
-//        private MovieDao movieDao;
-//
-//        private DeleteMovieAsyncTask(MovieDao movieDao){
-//            this.movieDao = movieDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Movie... movies){
-//            movieDao.delete(movies[0]);
-//            return null;
-//        }
-//    }
 }

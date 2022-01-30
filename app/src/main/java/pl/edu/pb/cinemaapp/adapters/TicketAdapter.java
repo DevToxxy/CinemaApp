@@ -22,7 +22,6 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import lombok.NonNull;
 import pl.edu.pb.cinemaapp.R;
-import pl.edu.pb.cinemaapp.entities.Movie;
 import pl.edu.pb.cinemaapp.entities.Ticket;
 
 public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolder> {

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.snackbar.Snackbar;
 
 import lombok.NonNull;
 import pl.edu.pb.cinemaapp.entities.Movie;

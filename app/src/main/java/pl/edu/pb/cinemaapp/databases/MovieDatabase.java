@@ -47,24 +47,7 @@ public abstract class MovieDatabase extends RoomDatabase {
                 dao.insert(new Movie("Interstellar",18, 160, 40));
                 dao.insert(new Movie("Inception",18, 155, 40));
             });
-            //new PopulateDbAsyncTask(instance).execute();
         }
     };
 
-//    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-//        private MovieDao movieDao;
-//
-//        private PopulateDbAsyncTask(MovieDatabase db){
-//            movieDao = db.movieDao();
-//        }
-//
-//        @Override
-//        protected Void doInBackground (Void... voids){
-//            movieDao.insert(new Movie("Tenet",15, 170));
-//            movieDao.insert(new Movie("Interstellar",18, 160));
-//            movieDao.insert(new Movie("Inception",18, 155));
-//
-//            return null;
-//        }
-//    }
 }
