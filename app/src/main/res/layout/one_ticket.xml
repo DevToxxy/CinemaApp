@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/one_movie_layout"
+    style="@style/CardView.Light"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/small_margin"
+    app:cardElevation="@dimen/small_margin"
+    app:cardMaxElevation="@dimen/small_margin"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/one_movie_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-    <ImageView
-        android:id="@+id/one_ticket_picture"
-        android:layout_width="@dimen/qr_width"
-        android:layout_height="@dimen/qr_height"
-        android:layout_marginStart="@dimen/big_margin"
-        android:layout_marginTop="@dimen/big_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        <ImageView
+            android:id="@+id/one_ticket_picture"
+            android:layout_width="@dimen/qr_width"
+            android:layout_height="@dimen/qr_height"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/one_ticket_movie_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/big_margin"
-        android:layout_marginTop="@dimen/huge_margin"
-        android:text="@string/movie_title_hint"
-        android:textSize="@dimen/big_font"
-        app:layout_constraintStart_toEndOf="@+id/one_ticket_picture"
-        app:layout_constraintTop_toTopOf="@+id/one_ticket_picture" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="@dimen/no_margin"
-        android:layout_height="@dimen/small_margin"
-        android:layout_marginTop="@dimen/big_margin"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/one_ticket_picture" />
+        <TextView
+            android:id="@+id/one_ticket_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/huge_margin"
+            android:text="@string/movie_title_hint"
+            android:textSize="@dimen/big_font"
+            app:layout_constraintStart_toEndOf="@+id/one_ticket_picture"
+            app:layout_constraintTop_toTopOf="@+id/one_ticket_picture" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
