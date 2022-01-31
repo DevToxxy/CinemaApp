@@ -41,7 +41,8 @@ public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolde
         @Override
         public boolean areContentsTheSame(@androidx.annotation.NonNull Ticket oldItem, @androidx.annotation.NonNull Ticket newItem) {
             return newItem.getMovieTitle().equals(oldItem.getMovieTitle())
-                    && newItem.getStringForQR().equals(oldItem.getStringForQR());
+                    && newItem.getStringForQR().equals(oldItem.getStringForQR())
+                    && newItem.getDate().equals(oldItem.getDate());
         }
     };
     @NonNull
@@ -79,6 +80,8 @@ public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolde
 
         //endregion
         holder.movieTitleTextView.setText(currentTicket.getMovieTitle());
+        holder.movieDateTextView.setText(String.valueOf(currentTicket.getDate()));
+
 
     }
 
@@ -89,6 +92,7 @@ public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolde
 
     protected class TicketHolder extends RecyclerView.ViewHolder{
         private TextView movieTitleTextView;
+        private TextView movieDateTextView;
 
         private ImageView pictureImageView;
 
@@ -97,6 +101,7 @@ public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolde
             super(itemView);
 
             movieTitleTextView = itemView.findViewById(R.id.one_ticket_movie_title);
+            movieDateTextView = itemView.findViewById(R.id.one_ticket_date);
 
             pictureImageView = itemView.findViewById(R.id.one_ticket_picture);
 

@@ -3,6 +3,8 @@ package pl.edu.pb.cinemaapp.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(tableName = "ticket_table")
 public class Ticket {
     @PrimaryKey(autoGenerate = true)
@@ -10,10 +12,13 @@ public class Ticket {
 
     private String movieTitle;
     private String stringForQR;
+    private Calendar date;
 
-    public Ticket(String movieTitle, String stringForQR) {
+
+    public Ticket(String movieTitle, String stringForQR, Calendar date) {
         this.movieTitle = movieTitle;
         this.stringForQR = stringForQR;
+        this.date = date;
     }
     public int getId() {
         return id;
@@ -37,5 +42,13 @@ public class Ticket {
 
     public void setStringForQR(String stringForQR) {
         this.stringForQR = stringForQR;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 }

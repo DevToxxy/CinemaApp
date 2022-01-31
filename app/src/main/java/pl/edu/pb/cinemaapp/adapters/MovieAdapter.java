@@ -37,7 +37,8 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
             return newItem.getTitle().equals(oldItem.getTitle())
                     && newItem.getAge() == oldItem.getAge()
                     && newItem.getLength() == oldItem.getLength()
-                    && newItem.getSeats() == oldItem.getSeats();
+                    && newItem.getSeats() == oldItem.getSeats()
+                    && newItem.getDate().equals(oldItem.getDate());
         }
     };
     @NonNull
@@ -57,6 +58,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         holder.ageTextView.setText(String.valueOf(currentMovie.getAge()));
         holder.lengthTextView.setText(String.valueOf(currentMovie.getLength()));
         holder.seatsTextView.setText(String.valueOf(currentMovie.getSeats()));
+        holder.dateTextView.setText(String.valueOf(currentMovie.getDate()));
 
         Glide.with(context)
                 .load("https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg")
@@ -92,6 +94,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
         private TextView ageTextView;
         private TextView lengthTextView;
         private TextView seatsTextView;
+        private TextView dateTextView;
 
         private ImageView pictureImageView;
 
@@ -103,6 +106,7 @@ public class MovieAdapter extends ListAdapter<Movie, MovieAdapter.MovieHolder>{
             ageTextView = itemView.findViewById(R.id.one_movie_age_rating);
             lengthTextView = itemView.findViewById(R.id.one_movie_length);
             seatsTextView = itemView.findViewById(R.id.one_movie_available_seats);
+            dateTextView = itemView.findViewById(R.id.one_movie_dates);
 
             pictureImageView = itemView.findViewById(R.id.one_movie_picture);
 

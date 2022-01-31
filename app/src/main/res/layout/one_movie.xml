@@ -22,8 +22,9 @@
             android:id="@+id/one_movie_picture"
             android:layout_width="@dimen/movie_width"
             android:layout_height="@dimen/movie_height"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="-10dp"
             android:text="@string/movie_title_hint"
             android:textSize="@dimen/big_font"
             app:layout_constraintStart_toEndOf="@+id/textView"
@@ -67,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="-10dp"
             android:text="@string/movie_title_label"
             android:textSize="@dimen/big_font"
             app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
@@ -115,6 +118,30 @@
             android:textSize="@dimen/big_font"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/one_movie_length" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/date_label"
+            android:textSize="@dimen/big_font"
+            app:layout_constraintStart_toEndOf="@+id/one_movie_picture"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/one_movie_dates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/movie_date_hint"
+            android:textSize="@dimen/big_font"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/one_movie_available_seats" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package pl.edu.pb.cinemaapp.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(tableName = "movie_table")
 public class Movie {
     @PrimaryKey(autoGenerate = true)
@@ -12,15 +14,18 @@ public class Movie {
     private int age;
     private int length;
     private int seats;
+    private Calendar date;
+
 
     public Movie(){
     }
 
-    public Movie(String title, int age, int length, int seats) {
+    public Movie(String title, int age, int length, int seats, Calendar date) {
         this.title = title;
         this.age = age;
         this.length = length;
         this.seats = seats;
+        this.date = date;
     }
 
     public int getId() {
@@ -61,5 +66,13 @@ public class Movie {
 
     public void setSeats(int seats) {
         this.seats = seats;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 }

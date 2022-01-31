@@ -9,16 +9,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import java.util.Calendar;
+
+import pl.edu.pb.cinemaapp.converters.CalendarConverter;
+
 
 public class AddEditMovie extends AppCompatActivity {
 
-    private EditText editMovieTitle, editMovieLength, editMovieAgeRating, editMovieSeatsAvailable;
+    private EditText editMovieTitle, editMovieLength, editMovieAgeRating, editMovieSeatsAvailable, editMovieDate;
 
     public static final String EXTRA_ID = "EXTRA_ID";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
     public static final String EXTRA_SEATS_AVAILABLE = "EXTRA_SEATS_AVAILABLE";
+    public static final String EXTRA_DATE = "EXTRA_DATE";
 
     boolean isAllFieldsChecked = false;
 
@@ -50,14 +55,14 @@ public class AddEditMovie extends AppCompatActivity {
         int age = Integer.parseInt(editMovieAgeRating.getText().toString());
         int length = Integer.parseInt(editMovieLength.getText().toString());
         int seats = Integer.parseInt(editMovieSeatsAvailable.getText().toString());
-
-
+        String date = editMovieDate.getText().toString();
 
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE,title);
         data.putExtra(EXTRA_AGE_RATING,age);
         data.putExtra(EXTRA_LENGTH,length);
         data.putExtra(EXTRA_SEATS_AVAILABLE,seats);
+        data.putExtra(EXTRA_DATE,date);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
