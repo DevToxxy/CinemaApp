@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 Calendar cal = movie.getDate();
                 Date date = cal.getTime();
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy 'at' hh:mm");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
                 String strDate = formatter.format(date);
 
                 intent.putExtra(AddEditMovie.EXTRA_DATE, strDate);
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 Calendar cal = movie.getDate();
                 Date date = cal.getTime();
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy 'at' hh:mm");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
                 String strDate = formatter.format(date);
 
                 intent.putExtra(AddEditMovie.EXTRA_DATE, strDate);
