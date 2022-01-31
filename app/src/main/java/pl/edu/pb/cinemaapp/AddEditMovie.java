@@ -2,12 +2,17 @@ package pl.edu.pb.cinemaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import java.util.Calendar;
 
@@ -25,8 +30,9 @@ public class AddEditMovie extends AppCompatActivity {
     public static final String EXTRA_SEATS_AVAILABLE = "EXTRA_SEATS_AVAILABLE";
     public static final String EXTRA_DATE = "EXTRA_DATE";
 
-    boolean isAllFieldsChecked = false;
-
+    private boolean isAllFieldsChecked = false;
+    private int year = 0, month = 0, day = 0, hour = 0, minute = 0;
+    private String dateString;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -57,6 +63,8 @@ public class AddEditMovie extends AppCompatActivity {
         int seats = Integer.parseInt(editMovieSeatsAvailable.getText().toString());
         String date = editMovieDate.getText().toString();
 
+
+
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE,title);
         data.putExtra(EXTRA_AGE_RATING,age);
@@ -82,6 +90,7 @@ public class AddEditMovie extends AppCompatActivity {
         editMovieLength = findViewById(R.id.edit_movie_length);
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
         editMovieSeatsAvailable = findViewById(R.id.edit_movie_available_seats);
+        editMovieDate = findViewById(R.id.edit_movie_date);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_movie_edit);
 
@@ -93,10 +102,18 @@ public class AddEditMovie extends AppCompatActivity {
             editMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
             editMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
             editMovieSeatsAvailable.setText(String.valueOf(intent.getIntExtra(EXTRA_SEATS_AVAILABLE, 40)));
+            editMovieDate.setText(intent.getStringExtra(EXTRA_DATE));
         }
         else {
             setTitle(R.string.activity_title_add);
         }
+
+        editMovieDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                datePicker();
+            }
+        });
 
 
     }
@@ -131,6 +148,44 @@ public class AddEditMovie extends AppCompatActivity {
         }
 
         return true;
+    }
+    private void datePicker(){
+        Calendar cal = Calendar.getInstance();
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        month = cal.get(Calendar.MONTH);
+        year = cal.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddEditMovie.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        dateString = dayOfMonth  + "." + (monthOfYear + 1) + "." + year;
+                        timePicker();
+                    }
+                }, year, month, day);
+        datePickerDialog.show();
+    }
+
+    private void timePicker(){
+        final Calendar c = Calendar.getInstance();
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(AddEditMovie.this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        hour = hourOfDay;
+                        minute = minute;
+
+                        editMovieDate.setText(dateString+" "+hourOfDay + ":" + minute);
+                    }
+                }, hour, minute, false);
+        timePickerDialog.show();
     }
 
 

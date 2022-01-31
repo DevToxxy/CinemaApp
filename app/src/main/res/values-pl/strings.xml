@@ -33,4 +33,6 @@
     <string name="activity_title_buy_ticket">Kup Bilet</string>
     <string name="activity_title_tickets">Twoje Bilety</string>
     <string name="button_reviews">Przeczytaj recenzje filmu</string>
+    <string name="date_label">Data:</string>
+    <string name="movie_date_hint">Data</string>
 </resources>

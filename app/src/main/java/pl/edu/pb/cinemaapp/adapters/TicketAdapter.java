@@ -20,6 +20,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import lombok.NonNull;
 import pl.edu.pb.cinemaapp.R;
 import pl.edu.pb.cinemaapp.entities.Ticket;
@@ -80,7 +84,15 @@ public class TicketAdapter extends ListAdapter<Ticket, TicketAdapter.TicketHolde
 
         //endregion
         holder.movieTitleTextView.setText(currentTicket.getMovieTitle());
-        holder.movieDateTextView.setText(String.valueOf(currentTicket.getDate()));
+
+        Calendar cal = currentTicket.getDate();
+        Date date = cal.getTime();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        String strDate = formatter.format(date);
+
+        holder.movieDateTextView.setText(strDate);
+
 
 
     }

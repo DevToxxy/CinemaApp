@@ -135,7 +135,6 @@
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:inputType="textPersonName"
             android:minHeight="@dimen/edit_text_min_height"
             android:textSize="@dimen/big_font" />
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class BuyTicket extends AppCompatActivity {
 
-    private TextView buyTicketMovieTitle, buyTicketMovieLength, buyTicketMovieAgeRating, buyTicketMovieSeatsAvailable;
+    private TextView buyTicketMovieTitle, buyTicketMovieLength, buyTicketMovieAgeRating, buyTicketMovieSeatsAvailable, buyTicketMovieDate;
     private Button readReviewsButton;
 
     public static final String EXTRA_ID = "EXTRA_ID";
@@ -21,6 +21,7 @@ public class BuyTicket extends AppCompatActivity {
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
     public static final String EXTRA_SEATS_AVAILABLE = "EXTRA_SEATS_AVAILABLE";
+    public static final String EXTRA_DATE = "EXTRA_DATE";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,6 +48,9 @@ public class BuyTicket extends AppCompatActivity {
         int age = Integer.parseInt(buyTicketMovieAgeRating.getText().toString());
         int length = Integer.parseInt(buyTicketMovieLength.getText().toString());
         int seats = Integer.parseInt(buyTicketMovieSeatsAvailable.getText().toString());
+        String stringDate = buyTicketMovieDate.getText().toString();
+
+
 
 
 
@@ -55,6 +59,7 @@ public class BuyTicket extends AppCompatActivity {
         data.putExtra(EXTRA_AGE_RATING,age);
         data.putExtra(EXTRA_LENGTH,length);
         data.putExtra(EXTRA_SEATS_AVAILABLE,seats);
+        data.putExtra(EXTRA_DATE,stringDate);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
@@ -77,6 +82,7 @@ public class BuyTicket extends AppCompatActivity {
         buyTicketMovieLength = findViewById(R.id.buy_ticket_movie_length);
         buyTicketMovieAgeRating = findViewById(R.id.buy_ticket_rating);
         buyTicketMovieSeatsAvailable = findViewById(R.id.buy_ticket_movie_seats);
+        buyTicketMovieDate = findViewById(R.id.buy_ticket_movie_date);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_movie_edit);
 
@@ -86,7 +92,7 @@ public class BuyTicket extends AppCompatActivity {
         buyTicketMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
         buyTicketMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
         buyTicketMovieSeatsAvailable.setText(String.valueOf(intent.getIntExtra(EXTRA_SEATS_AVAILABLE, 40)));
-
+        buyTicketMovieDate.setText(intent.getStringExtra(EXTRA_DATE));
 
         readReviewsButton = findViewById(R.id.button_read_reviews);
 
