@@ -30,6 +30,11 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import pl.edu.pb.cinemaapp.adapters.MovieAdapter;
 import pl.edu.pb.cinemaapp.entities.Movie;
 import pl.edu.pb.cinemaapp.entities.Ticket;
@@ -144,6 +149,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 intent.putExtra(AddEditMovie.EXTRA_AGE_RATING, movie.getAge());
                 intent.putExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE, movie.getSeats());
 
+
+
+                Calendar cal = movie.getDate();
+                Date date = cal.getTime();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                String strDate = formatter.format(date);
+
+                intent.putExtra(AddEditMovie.EXTRA_DATE, strDate);
+
+
                 startActivityForResult(intent, EDIT_MOVIE_REQUEST);
 
 
@@ -160,6 +176,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 intent.putExtra(BuyTicket.EXTRA_LENGTH, movie.getLength());
                 intent.putExtra(BuyTicket.EXTRA_AGE_RATING, movie.getAge());
                 intent.putExtra(BuyTicket.EXTRA_SEATS_AVAILABLE, movie.getSeats());
+
+                Calendar cal = movie.getDate();
+                Date date = cal.getTime();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                String strDate = formatter.format(date);
+
+                intent.putExtra(AddEditMovie.EXTRA_DATE, strDate);
 
                 startActivityForResult(intent, BUY_TICKET_REQUEST);
 
@@ -195,8 +219,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             int ageRating = data.getIntExtra(AddEditMovie.EXTRA_AGE_RATING,3);
             int length = data.getIntExtra(AddEditMovie.EXTRA_LENGTH,120);
             int seats = data.getIntExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE,40);
+            String dateString = data.getStringExtra(AddEditMovie.EXTRA_DATE);
 
-            Movie movie = new Movie(title,ageRating,length,seats);
+            //
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+            Date dateToParse = null;
+            try {
+                dateToParse = sdf.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Calendar date = sdf.getCalendar();
+            //
+
+            Movie movie = new Movie(title,ageRating,length,seats, date);
             movieViewModel.insert(movie);
 
             Toast.makeText(this, R.string.successful_save, Toast.LENGTH_SHORT).show();
@@ -231,8 +267,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             int ageRating = data.getIntExtra(AddEditMovie.EXTRA_AGE_RATING,3);
             int length = data.getIntExtra(AddEditMovie.EXTRA_LENGTH,120);
             int seats = data.getIntExtra(AddEditMovie.EXTRA_SEATS_AVAILABLE,40);
+            String dateString = data.getStringExtra(AddEditMovie.EXTRA_DATE);
 
-            Movie movie = new Movie(title,ageRating,length,seats);
+            //
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+            Date dateToParse = null;
+            try {
+                dateToParse = sdf.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Calendar date = sdf.getCalendar();
+            //
+
+            Movie movie = new Movie(title,ageRating,length,seats, date);
             movie.setId(id);
             movieViewModel.update(movie);
 
@@ -250,13 +298,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             int ageRating = data.getIntExtra(BuyTicket.EXTRA_AGE_RATING,3);
             int length = data.getIntExtra(BuyTicket.EXTRA_LENGTH,120);
             int seats = data.getIntExtra(BuyTicket.EXTRA_SEATS_AVAILABLE,40);
+            String dateString = data.getStringExtra(BuyTicket.EXTRA_DATE);
+            //
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+            Date dateToParse = null;
+            try {
+                dateToParse = sdf.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Calendar date = sdf.getCalendar();
+            //
 
             if(seats > 0) {
                 String qrSeed = title + ageRating + length + seats;
-                Ticket ticket = new Ticket(title, qrSeed);
+                Ticket ticket = new Ticket(title, qrSeed, date);
                 ticketViewModel.insert(ticket);
 
-                Movie movie = new Movie(title, ageRating, length, seats - 1);
+                Movie movie = new Movie(title, ageRating, length, seats - 1,date);
                 movie.setId(id);
                 movieViewModel.update(movie);
 

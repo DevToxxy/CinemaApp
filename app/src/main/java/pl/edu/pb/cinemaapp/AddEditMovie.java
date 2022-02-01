@@ -2,26 +2,37 @@ package pl.edu.pb.cinemaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
+
+import pl.edu.pb.cinemaapp.converters.CalendarConverter;
 
 
 public class AddEditMovie extends AppCompatActivity {
 
-    private EditText editMovieTitle, editMovieLength, editMovieAgeRating, editMovieSeatsAvailable;
+    private EditText editMovieTitle, editMovieLength, editMovieAgeRating, editMovieSeatsAvailable, editMovieDate;
 
     public static final String EXTRA_ID = "EXTRA_ID";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_AGE_RATING = "EXTRA_AGE_RATING";
     public static final String EXTRA_LENGTH = "EXTRA_LENGTH";
     public static final String EXTRA_SEATS_AVAILABLE = "EXTRA_SEATS_AVAILABLE";
+    public static final String EXTRA_DATE = "EXTRA_DATE";
 
-    boolean isAllFieldsChecked = false;
-
+    private boolean isAllFieldsChecked = false;
+    private int year = 0, month = 0, day = 0, hour = 0, minute = 0;
+    private String dateString;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -50,6 +61,7 @@ public class AddEditMovie extends AppCompatActivity {
         int age = Integer.parseInt(editMovieAgeRating.getText().toString());
         int length = Integer.parseInt(editMovieLength.getText().toString());
         int seats = Integer.parseInt(editMovieSeatsAvailable.getText().toString());
+        String date = editMovieDate.getText().toString();
 
 
 
@@ -58,6 +70,7 @@ public class AddEditMovie extends AppCompatActivity {
         data.putExtra(EXTRA_AGE_RATING,age);
         data.putExtra(EXTRA_LENGTH,length);
         data.putExtra(EXTRA_SEATS_AVAILABLE,seats);
+        data.putExtra(EXTRA_DATE,date);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
@@ -77,6 +90,7 @@ public class AddEditMovie extends AppCompatActivity {
         editMovieLength = findViewById(R.id.edit_movie_length);
         editMovieAgeRating = findViewById(R.id.edit_age_rating);
         editMovieSeatsAvailable = findViewById(R.id.edit_movie_available_seats);
+        editMovieDate = findViewById(R.id.edit_movie_date);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_movie_edit);
 
@@ -88,10 +102,18 @@ public class AddEditMovie extends AppCompatActivity {
             editMovieLength.setText(String.valueOf(intent.getIntExtra(EXTRA_LENGTH,120)));
             editMovieAgeRating.setText(String.valueOf(intent.getIntExtra(EXTRA_AGE_RATING,3)));
             editMovieSeatsAvailable.setText(String.valueOf(intent.getIntExtra(EXTRA_SEATS_AVAILABLE, 40)));
+            editMovieDate.setText(intent.getStringExtra(EXTRA_DATE));
         }
         else {
             setTitle(R.string.activity_title_add);
         }
+
+        editMovieDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                datePicker();
+            }
+        });
 
 
     }
@@ -124,8 +146,50 @@ public class AddEditMovie extends AppCompatActivity {
             editMovieSeatsAvailable.setError(getString(R.string.seats_validation_num));
             return false;
         }
+        if (editMovieDate.length() == 0) {
+            editMovieTitle.setError(getString(R.string.date_validation_req));
+            return false;
+        }
 
         return true;
+    }
+    private void datePicker(){
+        Calendar cal = Calendar.getInstance();
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        month = cal.get(Calendar.MONTH);
+        year = cal.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddEditMovie.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        dateString = dayOfMonth  + "." + (monthOfYear + 1) + "." + year;
+                        timePicker();
+                    }
+                }, year, month, day);
+        datePickerDialog.show();
+    }
+
+    private void timePicker(){
+        final Calendar c = Calendar.getInstance();
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(AddEditMovie.this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        hour = hourOfDay;
+                        minute = minute;
+
+                        editMovieDate.setText(dateString+" "+hourOfDay + ":" + minute);
+                    }
+                }, hour, minute, false);
+        timePickerDialog.show();
     }
 
 

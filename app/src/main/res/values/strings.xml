@@ -16,11 +16,13 @@
     <string name="age_rating_label">Age Rating:</string>
     <string name="length_label">Length:</string>
     <string name="seats_label">Seats:</string>
+    <string name="date_label">Date:</string>
 
     <string name="movie_title_hint">Title</string>
     <string name="age_rating_hint">Age Rating</string>
     <string name="length_hint">Length</string>
     <string name="seats_hint">Seats</string>
+    <string name="movie_date_hint">Date</string>
 
 
 
@@ -43,6 +45,7 @@
     <string name="rating_validation_req">Rating is required</string>
     <string name="length_validation_req">Length is required</string>
     <string name="seats_validation_req">Seats are required</string>
+    <string name="date_validation_req">Date is required</string>
 
     <string name="rating_validation_num">Only numbers allowed. Max number: 99</string>
     <string name="length_validation_num">Only numbers allowed. Max number: 999</string>

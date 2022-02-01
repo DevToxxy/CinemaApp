@@ -34,12 +34,21 @@
             android:id="@+id/one_ticket_movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/big_margin"
             android:layout_marginTop="@dimen/huge_margin"
             android:text="@string/movie_title_hint"
             android:textSize="@dimen/big_font"
             app:layout_constraintStart_toEndOf="@+id/one_ticket_picture"
             app:layout_constraintTop_toTopOf="@+id/one_ticket_picture" />
+
+        <TextView
+            android:id="@+id/one_ticket_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_margin"
+            android:text="@string/movie_date_hint"
+            android:textSize="@dimen/big_font"
+            app:layout_constraintStart_toEndOf="@+id/one_ticket_picture"
+            app:layout_constraintTop_toBottomOf="@+id/one_ticket_movie_title" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

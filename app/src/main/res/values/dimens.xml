@@ -3,10 +3,10 @@
     <dimen name="no_margin">0dp</dimen>
     <dimen name="small_margin">10dp</dimen>
     <dimen name="big_margin">20dp</dimen>
-    <dimen name="huge_margin">80dp</dimen>
+    <dimen name="huge_margin">60dp</dimen>
 
     <dimen name="small_font">16sp</dimen>
-    <dimen name="big_font">20sp</dimen>
+    <dimen name="big_font">18sp</dimen>
 
     <dimen name="qr_width">200dp</dimen>
     <dimen name="qr_height">200dp</dimen>
