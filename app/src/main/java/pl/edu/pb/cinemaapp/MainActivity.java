@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             String dateString = data.getStringExtra(AddEditMovie.EXTRA_DATE);
 
             //
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
             Date dateToParse = null;
             try {
                 dateToParse = sdf.parse(dateString);

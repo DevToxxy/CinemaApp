@@ -45,6 +45,7 @@
     <string name="rating_validation_req">Rating is required</string>
     <string name="length_validation_req">Length is required</string>
     <string name="seats_validation_req">Seats are required</string>
+    <string name="date_validation_req">Date is required</string>
 
     <string name="rating_validation_num">Only numbers allowed. Max number: 99</string>
     <string name="length_validation_num">Only numbers allowed. Max number: 999</string>

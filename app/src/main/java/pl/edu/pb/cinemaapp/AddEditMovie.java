@@ -146,6 +146,10 @@ public class AddEditMovie extends AppCompatActivity {
             editMovieSeatsAvailable.setError(getString(R.string.seats_validation_num));
             return false;
         }
+        if (editMovieDate.length() == 0) {
+            editMovieTitle.setError(getString(R.string.date_validation_req));
+            return false;
+        }
 
         return true;
     }
